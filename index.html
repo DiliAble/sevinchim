@@ -2,7 +2,7 @@
 <html lang="uz">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <title>Sevinchim uchun maxsus sovg'a ✨</title>
 
   <!-- Google Fonts: Romantic Serif + Modern Sans -->
@@ -37,8 +37,15 @@
 
   <style>
     /* =========================================
-       CORE LAYOUT & ROMANTIC NIGHT-SKY STYLING
+       CORE LAYOUT & RESPONSIVE DESIGN TOKENS
        ========================================= */
+    :root {
+      --moon-size: clamp(92px, min(30vw, 20dvh), 168px);
+      --moon-top-stage1: calc(clamp(32px, 6dvh, 52px) + env(safe-area-inset-top, 0px));
+      --moon-top-center: calc(clamp(10px, 2.2dvh, 22px) + env(safe-area-inset-top, 0px));
+      --stage-top-pad: calc(var(--moon-size) + clamp(38px, 6dvh, 58px) + env(safe-area-inset-top, 0px));
+    }
+
     * {
       box-sizing: border-box;
       -webkit-tap-highlight-color: transparent;
@@ -53,6 +60,7 @@
       background: #060412;
       color: #fff6f9;
       font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+      -webkit-text-size-adjust: 100%;
     }
 
     /* Fixed full-screen canvases */
@@ -75,7 +83,8 @@
     }
 
     /* =========================================
-       PROMINENT LUMINOUS 27.11.2005 MOON LAYER
+       ULTRA-REALISTIC LUMINOUS 27.11.2005 MOON
+       (Photographic corona + responsive scaling)
        ========================================= */
     #moonShowcase {
       position: fixed;
@@ -90,85 +99,71 @@
                   transform 0.85s cubic-bezier(0.22, 1, 0.36, 1);
     }
 
-    /* Stage 1: Upper right, glowing brightly */
+    /* Stage 1: Upper right, serene realistic moonlight */
     #moonShowcase.stage-1-pos {
-      top: 52px;
-      left: 78%;
+      top: var(--moon-top-stage1);
+      left: clamp(74%, 80vw, 86%);
       transform: translateX(-50%) scale(0.76);
     }
 
-    /* Stage 2-4: Centered prominent luminous moon above card */
+    /* Stage 2-4: Centered prominent realistic moon above card */
     #moonShowcase.stage-center-pos {
-      top: 22px;
+      top: var(--moon-top-center);
       left: 50%;
       transform: translateX(-50%) scale(1);
     }
 
     .moon-orb-wrap {
       position: relative;
-      width: 156px;
-      height: 156px;
+      width: var(--moon-size);
+      height: var(--moon-size);
       display: flex;
       align-items: center;
       justify-content: center;
-      animation: moonFloat 5.5s ease-in-out infinite;
     }
 
-    @media (min-width: 640px) {
-      .moon-orb-wrap {
-        width: 176px;
-        height: 176px;
-      }
-    }
-
-    @keyframes moonFloat {
-      0%, 100% { transform: translateY(0px); }
-      50% { transform: translateY(-6px); }
-    }
-
-    /* Strong multi-layered pulsing bright moonlight aura */
+    /* Realistic multi-layered silver-white lunar atmospheric corona */
     .moon-aura-outer {
       position: absolute;
-      inset: -65%;
+      inset: -78%;
       border-radius: 9999px;
       background: radial-gradient(
-        circle at 42% 50%,
-        rgba(255, 255, 255, 0.58) 0%,
-        rgba(215, 235, 255, 0.38) 24%,
-        rgba(170, 210, 255, 0.18) 50%,
-        rgba(255, 165, 210, 0.06) 72%,
+        circle at 36% 50%,
+        rgba(246, 251, 255, 0.44) 0%,
+        rgba(204, 226, 255, 0.24) 24%,
+        rgba(148, 188, 245, 0.11) 48%,
+        rgba(115, 152, 220, 0.03) 72%,
         rgba(0, 0, 0, 0) 100%
       );
-      filter: blur(18px);
-      animation: moonPulseAura 4s ease-in-out infinite;
+      filter: blur(22px);
+      animation: moonCoronaBreath 6s ease-in-out infinite;
     }
 
     .moon-aura-inner {
       position: absolute;
-      inset: -18%;
+      inset: -22%;
       border-radius: 9999px;
       background: radial-gradient(
-        circle at 32% 50%,
-        rgba(255, 255, 255, 0.72) 0%,
-        rgba(220, 238, 255, 0.32) 45%,
-        rgba(180, 215, 255, 0) 78%
+        circle at 26% 50%,
+        rgba(255, 255, 255, 0.62) 0%,
+        rgba(222, 238, 255, 0.28) 42%,
+        rgba(175, 208, 252, 0) 76%
       );
-      filter: blur(10px);
-      animation: moonPulseAura 3.2s ease-in-out infinite alternate;
+      filter: blur(11px);
     }
 
-    @keyframes moonPulseAura {
+    @keyframes moonCoronaBreath {
       0%, 100% {
-        opacity: 0.85;
-        transform: scale(0.97);
+        opacity: 0.9;
+        transform: scale(0.985);
       }
       50% {
         opacity: 1;
-        transform: scale(1.06);
+        transform: scale(1.03);
       }
     }
 
-    /* Exact uploaded moon image with bright luminous filter & screen blend */
+    /* Photographic moon image / procedural 3D-shaded canvas */
     .moon-visual {
       position: relative;
       z-index: 2;
@@ -177,19 +172,59 @@
       object-fit: contain;
       border-radius: 9999px;
       mix-blend-mode: screen;
-      filter: brightness(1.35) contrast(1.1)
-              drop-shadow(0 0 35px rgba(255, 255, 255, 0.95))
-              drop-shadow(0 0 80px rgba(180, 215, 255, 0.75));
+      filter: brightness(1.16) contrast(1.06)
+              drop-shadow(0 0 22px rgba(242, 249, 255, 0.78))
+              drop-shadow(0 0 58px rgba(170, 210, 255, 0.48));
     }
 
     /* Subtle date caption under moon */
     .moon-date-label {
-      margin-top: 6px;
-      font-size: 11px;
+      margin-top: clamp(4px, 0.9dvh, 7px);
+      font-size: clamp(9.5px, 2.5vw, 12px);
       letter-spacing: 0.24em;
       font-weight: 600;
       color: rgba(235, 244, 255, 0.92);
-      text-shadow: 0 0 12px rgba(200, 228, 255, 0.85), 0 0 24px rgba(255, 255, 255, 0.5);
+      text-shadow: 0 0 10px rgba(200, 228, 255, 0.75), 0 0 22px rgba(255, 255, 255, 0.4);
+    }
+
+    /* Responsive fluid typography & scrollable stage spacing */
+    .fluid-title {
+      font-size: clamp(1.25rem, 5.2vw, 1.95rem);
+      line-height: 1.24;
+    }
+
+    .fluid-erkatoy {
+      font-size: clamp(1.08rem, 4.7vw, 1.55rem);
+      line-height: 1.3;
+    }
+
+    .fluid-body {
+      font-size: clamp(0.875rem, 3.5vw, 1rem);
+      line-height: 1.6;
+    }
+
+    .stage-scroll {
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
+      padding-top: var(--stage-top-pad);
+      padding-bottom: calc(clamp(1.5rem, 4dvh, 2.75rem) + env(safe-area-inset-bottom, 0px));
+      padding-left: clamp(0.75rem, 4vw, 1.5rem);
+      padding-right: clamp(0.75rem, 4vw, 1.5rem);
+    }
+
+    /* Landscape / very short screens adaptation */
+    @media (max-height: 540px) {
+      :root {
+        --moon-size: clamp(72px, 18dvh, 112px);
+        --moon-top-stage1: calc(10px + env(safe-area-inset-top, 0px));
+        --moon-top-center: calc(8px + env(safe-area-inset-top, 0px));
+        --stage-top-pad: calc(var(--moon-size) + 28px + env(safe-area-inset-top, 0px));
+      }
+
+      #moonShowcase.stage-1-pos {
+        left: 88%;
+        transform: translateX(-50%) scale(0.72);
+      }
     }
 
     /* =========================================
@@ -204,6 +239,7 @@
         0 20px 55px rgba(4, 2, 14, 0.72),
         inset 0 1px 1px rgba(255, 255, 255, 0.16),
         0 0 38px rgba(255, 92, 141, 0.16);
+      padding: clamp(1.15rem, 4.2vw, 1.85rem);
     }
 
     /* Prominent Glowing Special Line: "Sen men uchun erkatoy qizaloqsan 💖" */
@@ -349,13 +385,37 @@
       transform: translateY(-1px);
     }
 
-    /* Custom Dark Inputs */
+    /* Custom Dark Inputs with strict iOS Safari & Mobile normalization */
     .romantic-input {
-      background: rgba(12, 7, 26, 0.65);
-      border: 1px solid rgba(255, 198, 218, 0.28);
+      -webkit-appearance: none;
+      appearance: none;
+      width: 100%;
+      max-width: 100%;
+      min-width: 0;
+      min-height: 48px;
+      box-sizing: border-box;
+      display: flex;
+      align-items: center;
+      padding: 11px 15px;
+      font-size: 16px;
+      line-height: 1.4;
+      background: rgba(12, 7, 26, 0.72);
+      border: 1px solid rgba(255, 198, 218, 0.32);
       color: #fff6f9;
       color-scheme: dark;
       transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    input[type="date"].romantic-input::-webkit-date-and-time-value,
+    input[type="time"].romantic-input::-webkit-date-and-time-value {
+      text-align: left;
+      width: 100%;
+    }
+
+    input[type="date"].romantic-input::-webkit-calendar-picker-indicator,
+    input[type="time"].romantic-input::-webkit-calendar-picker-indicator {
+      opacity: 0.85;
+      cursor: pointer;
     }
 
     .romantic-input:focus {
@@ -373,11 +433,12 @@
         0 24px 60px rgba(0, 0, 0, 0.68),
         0 0 46px rgba(255, 92, 141, 0.28),
         inset 0 1px 1px rgba(255, 240, 230, 0.28);
+      padding: clamp(1.25rem, 4.5vw, 1.85rem);
     }
 
     .ticket-divider {
       position: relative;
-      border-top: 1.5px dashed rgba(255, 208, 222, 0.34);
+      border-top: 1.5px dashed rgba(255, 200, 218, 0.32);
     }
 
     .ticket-divider::before,
@@ -388,43 +449,44 @@
       width: 22px;
       height: 22px;
       border-radius: 9999px;
-      background: #100921;
+      background: #0d071d;
       border: 1px solid rgba(255, 210, 180, 0.28);
     }
 
-    .ticket-divider::before { left: -34px; }
-    .ticket-divider::after { right: -34px; }
-
-    /* Archery Canvas touch prevention */
-    #gameCanvas {
-      touch-action: none;
-      user-select: none;
-      -webkit-user-select: none;
-      display: block;
-      width: 100%;
-      height: 100%;
+    .ticket-divider::before {
+      left: -34px;
     }
 
-    /* Floating Toast */
+    .ticket-divider::after {
+      right: -34px;
+    }
+
+    #gameCanvas {
+      width: 100%;
+      height: 100%;
+      display: block;
+      touch-action: none;
+    }
+
     #toastBox {
-      transition: opacity 0.3s ease, transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+      transition: opacity 0.35s ease, transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
     }
   </style>
 </head>
-<body class="relative min-h-[100dvh] w-full flex flex-col">
+<body class="relative select-none">
 
-  <!-- Background Night Sky (Stars & Shooting Stars) -->
+  <!-- Background Starry Night Sky Canvas -->
   <canvas id="skyCanvas" aria-hidden="true"></canvas>
 
-  <!-- Prominent Luminous 27.11.2005 Moon Showcase (Exact image_a74a7e.png + Canvas Fallback) -->
+  <!-- Prominent Realistic 27.11.2005 Moon Showcase (Exact image_a74a7e.png + Photorealistic 3D Canvas Fallback) -->
   <div id="moonShowcase" class="stage-1-pos" aria-hidden="true">
     <div class="moon-orb-wrap">
       <div class="moon-aura-outer"></div>
       <div class="moon-aura-inner"></div>
       <!-- Primary Uploaded Moon Image -->
       <img id="moonImg" src="image_a74a7e.png" alt="27.11.2005 Oy tasviri" class="moon-visual" />
-      <!-- High-detail Procedural Fallback Canvas (auto-shown if external image fails) -->
-      <canvas id="moonFallbackCanvas" width="360" height="360" class="moon-visual hidden"></canvas>
+      <!-- High-Resolution Photorealistic 3D Normal-Mapped Procedural Fallback Canvas -->
+      <canvas id="moonFallbackCanvas" width="512" height="512" class="moon-visual hidden"></canvas>
     </div>
     <span class="moon-date-label">27.11.2005</span>
   </div>
@@ -433,7 +495,8 @@
   <canvas id="fxCanvas" aria-hidden="true"></canvas>
 
   <!-- Top Utility Bar: Sound Toggle -->
-  <header class="fixed top-0 left-0 right-0 z-30 flex items-center justify-end px-4 pt-3 pb-2 pointer-events-none">
+  <header class="fixed top-0 left-0 right-0 z-30 flex items-center justify-end px-4 pb-2 pointer-events-none"
+    style="padding-top: calc(12px + env(safe-area-inset-top, 0px));">
     <button id="soundToggleBtn" type="button" aria-label="Ovozni yoqish yoki o'chirish"
       class="pointer-events-auto w-9 h-9 rounded-full flex items-center justify-center bg-black/35 backdrop-blur-md border border-pink-200/25 text-pink-100 hover:bg-white/10 active:scale-95 transition">
       <span id="soundIcon" class="text-sm">🔊</span>
@@ -452,8 +515,9 @@
        ========================================================= -->
   <section id="stage1" class="stage active visible relative z-10 w-full h-[100dvh] flex-col items-center justify-between overflow-hidden">
     <!-- Stage 1 Header -->
-    <div class="w-full pt-12 px-5 text-center pointer-events-none select-none z-20">
-      <h1 class="font-serif text-2xl sm:text-3xl font-bold text-shimmer drop-shadow-[0_2px_14px_rgba(255,105,155,0.45)]">
+    <div class="w-full px-5 text-center pointer-events-none select-none z-20"
+      style="padding-top: calc(44px + env(safe-area-inset-top, 0px));">
+      <h1 class="font-serif fluid-title font-bold text-shimmer drop-shadow-[0_2px_14px_rgba(255,105,155,0.45)]">
         Sevinchim uchun maxsus sovg'a ✨
       </h1>
       <p id="archeryHint" class="mt-1.5 text-xs sm:text-sm text-pink-100/90 font-medium">
@@ -467,7 +531,8 @@
     </div>
 
     <!-- Bottom Subtle Helper -->
-    <div class="pb-5 px-4 text-center pointer-events-none select-none z-20">
+    <div class="px-4 text-center pointer-events-none select-none z-20"
+      style="padding-bottom: calc(20px + env(safe-area-inset-bottom, 0px));">
       <span class="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-white/5 border border-pink-200/15 text-[11px] sm:text-xs text-pink-100/80 backdrop-blur-sm">
         <span>👇</span> Pastga tortib qo'yib yubor yoki yurakka qarab bos
       </span>
@@ -477,25 +542,25 @@
   <!-- =========================================================
        STAGE 2: BIRTHDAY GREETING, GLOWING LINE & RUNAWAY BUTTON
        ========================================================= -->
-  <section id="stage2" class="stage relative z-10 w-full min-h-[100dvh] flex-col items-center justify-end sm:justify-center px-4 pt-56 sm:pt-60 pb-10">
+  <section id="stage2" class="stage stage-scroll relative z-10 w-full min-h-[100dvh] flex-col items-center justify-start sm:justify-center">
     <!-- Main Birthday Glass Card -->
-    <div class="glass-card w-full max-w-md rounded-3xl p-6 sm:p-7 text-center relative overflow-hidden">
+    <div class="glass-card w-full max-w-md my-auto rounded-3xl text-center relative overflow-hidden">
       <!-- Subtle top rose glow -->
       <div class="absolute -top-16 left-1/2 -translate-x-1/2 w-56 h-32 bg-pink-500/20 blur-3xl pointer-events-none"></div>
 
       <!-- Updated Title -->
-      <h2 class="font-serif text-2xl sm:text-3xl font-bold leading-snug text-shimmer mb-3">
+      <h2 class="font-serif fluid-title font-bold text-shimmer mb-3">
         Tug'ilgan kuning bilan, Sevinchim! 🎂✨
       </h2>
 
       <!-- Updated Main Birthday Message -->
-      <p class="text-sm sm:text-base leading-relaxed text-pink-50/95 font-medium mb-5">
+      <p class="fluid-body text-pink-50/95 font-medium mb-4 sm:mb-5">
         Ota-onang va barchamizning baxtimiz uchun har doim baxt va quvonchga to'lib yur!
       </p>
 
       <!-- VERY PROMINENT BRIGHT GLOWING SPECIAL PHRASE -->
       <div class="erkatoy-glow-box rounded-2xl px-4 py-4 mb-5">
-        <p class="erkatoy-glow-text font-serif text-xl sm:text-2xl font-bold tracking-wide leading-snug">
+        <p class="erkatoy-glow-text font-serif fluid-erkatoy font-bold tracking-wide">
           Sen men uchun erkatoy qizaloqsan 💖
         </p>
       </div>
@@ -528,15 +593,15 @@
   <!-- =========================================================
        STAGE 3 & 4: MEETING PLANNER & CONFIRMED ROMANTIC TICKET
        ========================================================= -->
-  <section id="stage3" class="stage relative z-10 w-full min-h-[100dvh] flex-col items-center justify-end sm:justify-center px-4 pt-56 sm:pt-60 pb-10">
+  <section id="stage3" class="stage stage-scroll relative z-10 w-full min-h-[100dvh] flex-col items-center justify-start sm:justify-center">
 
     <!-- Step 3: Simplified Date Planner Form Card -->
-    <div id="plannerCard" class="glass-card w-full max-w-md rounded-3xl p-6 sm:p-7 relative overflow-hidden">
+    <div id="plannerCard" class="glass-card w-full max-w-md my-auto rounded-3xl relative overflow-hidden">
       <div class="text-center mb-5">
         <span class="inline-block px-3 py-1 rounded-full bg-rose-500/20 border border-rose-300/35 text-[11px] font-semibold text-rose-200 mb-2">
           Yuragingni zabt etdim 💘
         </span>
-        <h2 class="font-serif text-2xl sm:text-3xl font-bold text-shimmer">
+        <h2 class="font-serif fluid-title font-bold text-shimmer">
           Uchrashuvimizni rejalashtiramiz
         </h2>
         <p class="text-xs sm:text-sm text-pink-100/80 mt-1">
@@ -545,31 +610,31 @@
       </div>
 
       <form id="datePlannerForm" class="space-y-4">
-        <!-- Date & Time Row -->
-        <div class="grid grid-cols-2 gap-3">
-          <div>
-            <label for="dateInput" class="block text-xs font-semibold text-pink-200/90 mb-1.5 pl-1">
+        <!-- Vertically Stacked Date & Time Rows (Prevents iOS Safari / iPhone 11 overlap) -->
+        <div class="flex flex-col gap-4 w-full">
+          <div class="w-full min-w-0">
+            <label for="dateInput" class="block text-xs sm:text-sm font-semibold text-pink-200/95 mb-2 pl-1">
               📅 Sana
             </label>
             <input id="dateInput" type="date" value="2026-11-27" required
-              class="romantic-input w-full rounded-2xl px-3.5 py-3 text-sm font-medium" />
+              class="romantic-input rounded-2xl font-medium" />
           </div>
 
-          <div>
-            <label for="timeInput" class="block text-xs font-semibold text-pink-200/90 mb-1.5 pl-1">
+          <div class="w-full min-w-0">
+            <label for="timeInput" class="block text-xs sm:text-sm font-semibold text-pink-200/95 mb-2 pl-1">
               ⏰ Soat
             </label>
             <input id="timeInput" type="time" value="18:00" required
-              class="romantic-input w-full rounded-2xl px-3.5 py-3 text-sm font-medium" />
+              class="romantic-input rounded-2xl font-medium" />
           </div>
         </div>
 
         <!-- ONLY 3 Location Chips + Custom Wish Input -->
-        <div>
-          <label class="block text-xs font-semibold text-pink-200/90 mb-2 pl-1">
+        <div class="pt-1">
+          <label class="block text-xs sm:text-sm font-semibold text-pink-200/95 mb-2 pl-1">
             📍 Qayerda uchrashamiz?
           </label>
-          <div id="placeChips" class="grid grid-cols-3 gap-2 mb-3">
+          <div id="placeChips" class="grid grid-cols-3 gap-2 mb-4">
             <button type="button" data-place="🌳 Bog'da" class="place-chip selected rounded-2xl px-2 py-3 text-xs sm:text-sm font-medium text-pink-100 text-center cursor-pointer">
               🌳 Bog'da
             </button>
@@ -581,25 +646,25 @@
             </button>
           </div>
 
-          <label for="customPlaceInput" class="block text-xs font-semibold text-pink-200/85 mb-1.5 pl-1">
+          <label for="customPlaceInput" class="block text-xs sm:text-sm font-semibold text-pink-200/90 mb-2 pl-1">
             💌 O'zingiz xohlagan taklif
           </label>
-          <input id="customPlaceInput" type="text" placeholder="Yoki o'zingiz xohlagan joy / taklifni yozing..."
-            class="romantic-input w-full rounded-2xl px-4 py-3 text-sm placeholder:text-pink-200/45" />
+          <input id="customPlaceInput" type="text" placeholder="Yoki o'zingiz xohlagan joyni yozing..."
+            class="romantic-input rounded-2xl placeholder:text-pink-200/45" />
         </div>
 
         <!-- Confirm Button -->
         <button type="submit"
           class="btn-love w-full mt-2 py-3.5 px-6 rounded-2xl text-white font-semibold text-base tracking-wide flex items-center justify-center gap-2 cursor-pointer">
           <span>Uchrashuvni belgilash</span>
-          <span>✨</span>
+          <span>💖</span>
         </button>
       </form>
     </div>
 
     <!-- Step 4: Confirmed Romantic Digital Ticket (NO Send/Share/Copy Buttons) -->
-    <div id="ticketCard" class="hidden w-full max-w-md flex-col items-center">
-      <div class="love-ticket w-full rounded-3xl p-6 sm:p-7 overflow-hidden">
+    <div id="ticketCard" class="hidden w-full max-w-md my-auto flex-col items-center">
+      <div class="love-ticket w-full rounded-3xl overflow-hidden">
         <!-- Top Ticket Header -->
         <div class="flex items-center justify-between mb-4">
           <span class="text-[11px] uppercase tracking-[0.2em] text-amber-200/95 font-semibold">
@@ -748,9 +813,14 @@
       }
 
       /* -----------------------------------------
-         3. MOON IMAGE + HIGH-DETAIL FALLBACK CANVAS
-            Matches image_a74a7e.png: ~25% left-lit waning crescent
-            with detailed craters and dark right side
+         3. ULTRA-REALISTIC 27.11.2005 MOON GENERATOR
+            Matches image_a74a7e.png (~23% left-lit waning crescent):
+            - Multi-octave fractal noise (fBm) for lunar regolith
+            - Realistic dark basaltic maria patches
+            - Heightfield impact craters with bright rims & shadowed bowls
+            - Subtle bright crater ejecta rays
+            - True 3D spherical Lommel-Seeliger + normal-mapped terminator
+            - Subtle blue-gray earthshine on the night side
          ----------------------------------------- */
       const moonImg = document.getElementById('moonImg');
       const moonFallbackCanvas = document.getElementById('moonFallbackCanvas');
@@ -759,102 +829,249 @@
       function drawFallbackCrescentMoon(canvas) {
         const size = canvas.width;
         const c = canvas.getContext('2d');
-        const cx = size / 2;
-        const cy = size / 2;
-        const r = size * 0.44;
+        const imgData = c.createImageData(size, size);
+        const data = imgData.data;
 
-        c.clearRect(0, 0, size, size);
+        const cx = size * 0.5;
+        const cy = size * 0.5;
+        const R = size * 0.455;
 
-        // Clip to circular moon sphere
-        c.save();
-        c.beginPath();
-        c.arc(cx, cy, r, 0, Math.PI * 2);
-        c.clip();
+        // Deterministic fast 2D hash & smooth value noise
+        function hash2(ix, iy) {
+          let n = Math.sin(ix * 127.1 + iy * 311.7) * 43758.5453123;
+          return n - Math.floor(n);
+        }
 
-        // Deep dark shadowed right side
-        c.fillStyle = '#04040a';
-        c.fillRect(cx - r, cy - r, r * 2, r * 2);
+        function valueNoise(x, y) {
+          const ix = Math.floor(x);
+          const iy = Math.floor(y);
+          const fx = x - ix;
+          const fy = y - iy;
+          const ux = fx * fx * (3 - 2 * fx);
+          const uy = fy * fy * (3 - 2 * fy);
+          const a = hash2(ix, iy);
+          const b = hash2(ix + 1, iy);
+          const d = hash2(ix, iy + 1);
+          const e = hash2(ix + 1, iy + 1);
+          return a + (b - a) * ux + (d - a) * uy + (a - b - d + e) * ux * uy;
+        }
 
-        // Prepare textured illuminated lunar surface on offscreen canvas
-        const lit = document.createElement('canvas');
-        lit.width = size;
-        lit.height = size;
-        const lc = lit.getContext('2d');
+        // 5-octave Fractal Brownian Motion (fBm) for lunar surface regolith
+        function fbm(x, y, octaves) {
+          let val = 0;
+          let amp = 0.5;
+          let freq = 1.0;
+          for (let i = 0; i < octaves; i++) {
+            val += amp * valueNoise(x * freq, y * freq);
+            freq *= 2.04;
+            amp *= 0.5;
+          }
+          return val;
+        }
 
-        // Silvery-white bright lunar base matching photo tones
-        const baseGrad = lc.createRadialGradient(cx - r * 0.65, cy - r * 0.1, r * 0.08, cx - r * 0.1, cy, r * 1.15);
-        baseGrad.addColorStop(0, '#f4f5f8');
-        baseGrad.addColorStop(0.35, '#d5d4d8');
-        baseGrad.addColorStop(0.7, '#9c999f');
-        baseGrad.addColorStop(1, '#58555c');
-        lc.fillStyle = baseGrad;
-        lc.beginPath();
-        lc.arc(cx, cy, r, 0, Math.PI * 2);
-        lc.fill();
-
-        // Realistic dark maria (Oceanus Procellarum on left-upper limb)
+        // Curated realistic lunar maria on the left waning hemisphere
         const maria = [
-          { x: -0.58, y: -0.34, rx: 0.34, ry: 0.28, a: 0.36, rot: -0.35 },
-          { x: -0.72, y: 0.02, rx: 0.22, ry: 0.26, a: 0.28, rot: 0.1 },
-          { x: -0.45, y: -0.15, rx: 0.28, ry: 0.35, a: 0.32, rot: -0.2 },
-          { x: -0.60, y: 0.36, rx: 0.24, ry: 0.18, a: 0.20, rot: 0.25 },
+          { x: -0.60, y: -0.28, rx: 0.34, ry: 0.28, depth: 0.36 },
+          { x: -0.74, y: 0.04, rx: 0.22, ry: 0.26, depth: 0.28 },
+          { x: -0.44, y: -0.10, rx: 0.28, ry: 0.34, depth: 0.32 },
+          { x: -0.62, y: 0.36, rx: 0.24, ry: 0.18, depth: 0.24 },
+          { x: -0.54, y: -0.56, rx: 0.22, ry: 0.16, depth: 0.22 },
+          { x: 0.15, y: -0.18, rx: 0.38, ry: 0.32, depth: 0.26 },
         ];
-        maria.forEach(m => {
-          lc.fillStyle = `rgba(38, 36, 44, ${m.a})`;
-          lc.beginPath();
-          lc.ellipse(cx + m.x * r, cy + m.y * r, m.rx * r, m.ry * r, m.rot, 0, Math.PI * 2);
-          lc.fill();
-        });
 
-        // Detailed craters along the bright left crescent (matching image_a74a7e.png)
+        // Multi-scale realistic impact craters (bowl depression + raised rim)
         const craters = [
-          { x: -0.84, y: -0.18, cr: 0.065, d: 0.45 }, // Grimaldi-like dark crater near left limb
-          { x: -0.68, y: 0.28, cr: 0.075, d: 0.28 },
-          { x: -0.76, y: 0.14, cr: 0.055, d: 0.30 },
-          { x: -0.55, y: 0.56, cr: 0.085, d: 0.24 },
-          { x: -0.62, y: -0.56, cr: 0.060, d: 0.26 },
-          { x: -0.78, y: -0.38, cr: 0.045, d: 0.28 },
-          { x: -0.65, y: 0.04, cr: 0.040, d: 0.25 },
-          { x: -0.52, y: 0.72, cr: 0.055, d: 0.22 },
-          { x: -0.46, y: -0.68, cr: 0.050, d: 0.24 },
-          { x: -0.86, y: 0.08, cr: 0.042, d: 0.30 },
+          { x: -0.83, y: -0.17, r: 0.070, d: 1.00, ray: 0.18 },
+          { x: -0.70, y: 0.28, r: 0.078, d: 0.88, ray: 0.22 },
+          { x: -0.77, y: 0.12, r: 0.056, d: 0.82, ray: 0.10 },
+          { x: -0.58, y: 0.54, r: 0.088, d: 0.85, ray: 0.25 },
+          { x: -0.62, y: -0.52, r: 0.064, d: 0.80, ray: 0.12 },
+          { x: -0.79, y: -0.37, r: 0.046, d: 0.78, ray: 0.08 },
+          { x: -0.66, y: 0.03, r: 0.044, d: 0.76, ray: 0.06 },
+          { x: -0.52, y: 0.71, r: 0.056, d: 0.72, ray: 0.09 },
+          { x: -0.47, y: -0.67, r: 0.052, d: 0.72, ray: 0.07 },
+          { x: -0.86, y: 0.07, r: 0.044, d: 0.80, ray: 0.08 },
+          { x: -0.70, y: 0.43, r: 0.040, d: 0.75, ray: 0.06 },
+          { x: -0.73, y: -0.23, r: 0.035, d: 0.70, ray: 0.05 },
+          { x: -0.55, y: -0.08, r: 0.038, d: 0.65, ray: 0.05 },
+          { x: -0.42, y: 0.32, r: 0.048, d: 0.70, ray: 0.08 },
+          { x: -0.36, y: -0.34, r: 0.042, d: 0.66, ray: 0.05 },
+          { x: -0.61, y: 0.18, r: 0.028, d: 0.68, ray: 0.04 },
+          { x: -0.82, y: -0.04, r: 0.030, d: 0.72, ray: 0.05 },
+          { x: -0.48, y: 0.12, r: 0.032, d: 0.65, ray: 0.04 },
+          { x: -0.64, y: -0.32, r: 0.026, d: 0.65, ray: 0.04 },
+          { x: -0.54, y: 0.42, r: 0.030, d: 0.68, ray: 0.04 },
         ];
-        craters.forEach(cr => {
-          const x = cx + cr.x * r;
-          const y = cy + cr.y * r;
-          const rad = cr.cr * r;
-          lc.fillStyle = `rgba(42, 40, 48, ${cr.d})`;
-          lc.beginPath();
-          lc.arc(x, y, rad, 0, Math.PI * 2);
-          lc.fill();
-          lc.strokeStyle = 'rgba(255, 255, 255, 0.35)';
-          lc.lineWidth = 1.5;
-          lc.beginPath();
-          lc.arc(x - rad * 0.15, y - rad * 0.1, rad * 0.9, Math.PI * 0.7, Math.PI * 1.7);
-          lc.stroke();
-        });
 
-        // Carve out the shadowed right ~75% to leave exact ~25% left waning crescent
-        lc.globalCompositeOperation = 'destination-out';
-        lc.filter = 'blur(7px)';
-        lc.beginPath();
-        lc.ellipse(cx + r * 0.36, cy, r * 0.88, r * 1.06, 0.14, 0, Math.PI * 2);
-        lc.fill();
+        // Add seeded small micro-craters across the crescent limb
+        for (let k = 0; k < 38; k++) {
+          const ang = Math.PI * 0.52 + hash2(k, 13.7) * Math.PI * 0.96;
+          const radDist = 0.25 + Math.pow(hash2(k, 29.3), 0.6) * 0.72;
+          craters.push({
+            x: Math.cos(ang) * radDist,
+            y: Math.sin(ang) * radDist,
+            r: 0.012 + hash2(k, 41.1) * 0.024,
+            d: 0.45 + hash2(k, 57.9) * 0.35,
+            ray: 0,
+          });
+        }
 
-        // Draw carved illuminated crescent onto main canvas
-        c.drawImage(lit, 0, 0);
+        // Sun direction for ~23% waning crescent illuminated from the left, slightly tilted
+        // (Matches the uploaded 27.11.2005 photo)
+        let lx = -0.885;
+        let ly = -0.105;
+        let lz = -0.454;
+        const lLen = Math.hypot(lx, ly, lz);
+        lx /= lLen;
+        ly /= lLen;
+        lz /= lLen;
 
-        // Crisp luminous silver-white left rim
-        c.strokeStyle = 'rgba(255, 255, 255, 0.88)';
-        c.lineWidth = 2.5;
-        c.beginPath();
-        c.arc(cx, cy, r - 1, Math.PI * 0.56, Math.PI * 1.44);
-        c.stroke();
+        // Helper: compute lunar surface height & albedo at normalized sphere point (nx, ny)
+        function sampleSurface(nx, ny, nz) {
+          // Spherical-projected coordinates to prevent flat stretching near the limb
+          const u = Math.asin(Math.max(-1, Math.min(1, nx))) * 2.2;
+          const v = Math.asin(Math.max(-1, Math.min(1, ny))) * 2.2;
 
-        c.restore();
+          const baseNoise = fbm(u * 2.3 + 4.1, v * 2.3 + 2.7, 5);
+          const fineGrain = fbm(u * 10.5 + 11.3, v * 10.5 + 7.9, 3);
+
+          // Lunar highland albedo (natural neutral silvery-gray)
+          let albedo = 0.64 + (baseNoise - 0.5) * 0.26 + (fineGrain - 0.5) * 0.10;
+          let height = (baseNoise - 0.5) * 0.38 + (fineGrain - 0.5) * 0.14;
+
+          // Dark basaltic maria basins
+          for (let i = 0; i < maria.length; i++) {
+            const m = maria[i];
+            const dx = (nx - m.x) / m.rx;
+            const dy = (ny - m.y) / m.ry;
+            const d2 = dx * dx + dy * dy;
+            if (d2 < 1.8) {
+              const warp = (baseNoise - 0.5) * 0.42;
+              const t = Math.max(0, 1 - (Math.sqrt(d2) + warp));
+              const smooth = t * t * (3 - 2 * t);
+              albedo -= smooth * m.depth;
+              height -= smooth * 0.12;
+            }
+          }
+
+          // Impact craters: recessed bowl, raised rim, and subtle ejecta rays
+          for (let i = 0; i < craters.length; i++) {
+            const cr = craters[i];
+            const dx = nx - cr.x;
+            const dy = ny - cr.y;
+            const d = Math.hypot(dx, dy);
+            const r = cr.r;
+
+            if (d < r * 1.45) {
+              const q = d / r;
+              if (q < 1.0) {
+                // Parabolic crater bowl
+                const bowl = (q * q - 1.0) * 0.42 * cr.d;
+                height += bowl;
+                albedo -= (1 - q * q) * 0.08 * cr.d;
+              } else {
+                // Raised crater rim falling off smoothly
+                const rimT = 1 - (q - 1.0) / 0.45;
+                const rim = rimT * rimT * 0.18 * cr.d;
+                height += rim;
+                albedo += rimT * 0.10 * cr.d;
+              }
+            }
+
+            // Subtle bright ejecta rays around major craters
+            if (cr.ray > 0 && d > r * 0.9 && d < r * 4.2) {
+              const ang = Math.atan2(dy, dx);
+              const rayPattern = Math.pow(0.5 + 0.5 * Math.sin(ang * 7 + cr.x * 18), 4);
+              const falloff = Math.max(0, 1 - (d - r * 0.9) / (r * 3.3));
+              albedo += rayPattern * falloff * falloff * cr.ray * 0.28;
+            }
+          }
+
+          return {
+            albedo: Math.max(0.16, Math.min(0.96, albedo)),
+            height,
+          };
+        }
+
+        const eps = 0.008;
+
+        for (let py = 0; py < size; py++) {
+          const ny = (py - cy) / R;
+          const ny2 = ny * ny;
+          for (let px = 0; px < size; px++) {
+            const nx = (px - cx) / R;
+            const r2 = nx * nx + ny2;
+            const idx = (py * size + px) * 4;
+
+            if (r2 > 1.015) {
+              data[idx + 3] = 0;
+              continue;
+            }
+
+            // Smooth anti-aliased lunar limb edge
+            const dist = Math.sqrt(r2);
+            const edgeAlpha = dist > 0.992 ? Math.max(0, Math.min(1, (1.006 - dist) / 0.014)) : 1;
+            const nz = Math.sqrt(Math.max(0, 1 - Math.min(1, r2)));
+
+            const s0 = sampleSurface(nx, ny, nz);
+            const sx = sampleSurface(nx + eps, ny, nz);
+            const sy = sampleSurface(nx, ny + eps, nz);
+
+            // Perturb spherical normal with crater & regolith bump gradient
+            const bumpStrength = 2.6;
+            const dHx = (sx.height - s0.height) / eps;
+            const dHy = (sy.height - s0.height) / eps;
+
+            let pnx = nx - dHx * bumpStrength * 0.085;
+            let pny = ny - dHy * bumpStrength * 0.085;
+            let pnz = nz;
+            const pLen = Math.hypot(pnx, pny, pnz) || 1;
+            pnx /= pLen;
+            pny /= pLen;
+            pnz /= pLen;
+
+            // Macro spherical dot product (controls true terminator) & micro normal dot product
+            const macroDot = nx * lx + ny * ly + nz * lz;
+            const microDot = pnx * lx + pny * ly + pnz * lz;
+
+            // Soft realistic lunar terminator transition
+            const litMask = Math.max(0, Math.min(1, (macroDot + 0.045) / 0.11));
+            const smoothMask = litMask * litMask * (3 - 2 * litMask);
+
+            // Lommel-Seeliger lunar photometric reflectance (flat bright limb, crisp crater shadows near terminator)
+            const mu0 = Math.max(0, microDot);
+            const mu = Math.max(0.08, nz);
+            const lommel = (mu0 / (mu0 + mu * 0.65)) * 1.48;
+
+            // Subtle crisp bright sunlit lunar limb rim on the left
+            const limbRim = nx < 0 ? Math.pow(Math.max(0, 1 - nz), 2.8) * smoothMask * 0.24 : 0;
+
+            // Faint realistic blue-gray Earthshine on the unlit night side
+            const earthshine = (0.042 + s0.albedo * 0.036) * (0.65 + 0.35 * nz);
+
+            const litIntensity = s0.albedo * lommel * smoothMask + limbRim;
+
+            // Combine sunlit warm-silver lunar regolith with cool faint earthshine
+            let rCol = litIntensity * 252 + earthshine * 155;
+            let gCol = litIntensity * 250 + earthshine * 172;
+            let bCol = litIntensity * 246 + earthshine * 212;
+
+            // Subtle photographic gamma lift for natural luminance
+            rCol = Math.min(255, Math.pow(Math.max(0, rCol) / 255, 0.92) * 255);
+            gCol = Math.min(255, Math.pow(Math.max(0, gCol) / 255, 0.92) * 255);
+            bCol = Math.min(255, Math.pow(Math.max(0, bCol) / 255, 0.92) * 255);
+
+            data[idx] = rCol;
+            data[idx + 1] = gCol;
+            data[idx + 2] = bCol;
+            data[idx + 3] = Math.round(edgeAlpha * 255);
+          }
+        }
+
+        c.putImageData(imgData, 0, 0);
       }
 
-      // Draw fallback immediately so it is ready if image fails
+      // Generate high-detail photorealistic fallback immediately
       drawFallbackCrescentMoon(moonFallbackCanvas);
 
       function activateMoonFallback() {
@@ -1189,10 +1406,12 @@
         gameCanvas.height = gH * dpr;
         gCtx.setTransform(dpr, 0, 0, dpr, 0, 0);
 
+        const minDim = Math.min(gW, gH);
         bow.x = gW / 2;
-        bow.y = gH - Math.max(78, gH * 0.16);
-        target.baseY = Math.max(82, gH * 0.24);
-        target.radius = Math.min(40, Math.max(30, gW * 0.085));
+        bow.y = gH - Math.max(54, Math.min(108, gH * 0.17));
+        bow.maxPull = Math.max(64, Math.min(105, minDim * 0.24));
+        target.baseY = Math.max(52, Math.min(165, gH * 0.24));
+        target.radius = Math.min(40, Math.max(24, minDim * 0.088));
         if (!arrow.flying && !arrow.stuck) {
           arrow.x = bow.x;
           arrow.y = bow.y;
@@ -1537,12 +1756,12 @@
       const noMeetBtn = document.getElementById('noMeetBtn');
 
       const playfulTexts = [
-        'Aniqmi? 🥺',
-        "O'ylab ko'r!",
-        'Qocha olmaysan 😜',
+        'Rostdanmi? 🥺',
+        "O'ylab ko'rgin 😅",
+        "Yo'q dema 💔",
+        'Tutolmaysan 😜',
         'Baribir uchrashamiz ❤️',
-        "Yo'q dema!",
-        'Xohlamayman',
+        'Aniqmi? 🥺',
       ];
       let runawayCount = 0;
       let isDetachedToBody = false;
@@ -1550,14 +1769,15 @@
 
       function clampRunawayInsideViewport() {
         if (!isDetachedToBody || currentStage !== 2) return;
-        const margin = 20;
-        const btnW = Math.max(noMeetBtn.offsetWidth, 140);
-        const btnH = Math.max(noMeetBtn.offsetHeight, 48);
+        const margin = Math.max(14, Math.min(24, window.innerWidth * 0.04));
+        const topSafe = Math.max(52, Math.min(72, window.innerHeight * 0.08));
+        const btnW = Math.max(noMeetBtn.offsetWidth, 136);
+        const btnH = Math.max(noMeetBtn.offsetHeight, 44);
         const curLeft = parseFloat(noMeetBtn.style.left) || margin;
-        const curTop = parseFloat(noMeetBtn.style.top) || 80;
+        const curTop = parseFloat(noMeetBtn.style.top) || topSafe;
 
         const clampedX = Math.min(Math.max(margin, curLeft), Math.max(margin, window.innerWidth - btnW - margin));
-        const clampedY = Math.min(Math.max(margin, curTop), Math.max(margin, window.innerHeight - btnH - margin));
+        const clampedY = Math.min(Math.max(topSafe, curTop), Math.max(topSafe, window.innerHeight - btnH - margin));
 
         noMeetBtn.style.left = `${Math.round(clampedX)}px`;
         noMeetBtn.style.top = `${Math.round(clampedY)}px`;
@@ -1601,10 +1821,10 @@
         }
 
         // Measure actual current dimensions after text update
-        const btnW = noMeetBtn.offsetWidth || 150;
-        const btnH = noMeetBtn.offsetHeight || 48;
-        const margin = 20;
-        const topMargin = 64;
+        const btnW = noMeetBtn.offsetWidth || 148;
+        const btnH = noMeetBtn.offsetHeight || 46;
+        const margin = Math.max(14, Math.min(24, window.innerWidth * 0.04));
+        const topMargin = Math.max(52, Math.min(72, window.innerHeight * 0.08));
 
         const maxX = Math.max(margin, window.innerWidth - btnW - margin);
         const maxY = Math.max(topMargin, window.innerHeight - btnH - margin);
@@ -1786,6 +2006,9 @@
       }
 
       window.addEventListener('resize', handleResize);
+      window.addEventListener('orientationchange', () => {
+        setTimeout(handleResize, 120);
+      });
       window.onload = function () {
         handleResize();
         requestAnimationFrame(mainLoop);
