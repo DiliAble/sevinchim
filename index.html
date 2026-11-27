@@ -1,0 +1,1796 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>Sevinchim uchun maxsus sovg'a ✨</title>
+
+  <!-- Google Fonts: Romantic Serif + Modern Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Tone.js for gentle romantic sound effects -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.49/Tone.js"></script>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            serif: ['"Playfair Display"', 'Georgia', 'serif'],
+            sans: ['"Plus Jakarta Sans"', 'system-ui', 'sans-serif'],
+          },
+          colors: {
+            midnight: '#070516',
+            plum: '#1e0f2e',
+            rosegold: '#f3c6b6',
+            blush: '#ff5c8d',
+          },
+        },
+      },
+    };
+  </script>
+
+  <style>
+    /* =========================================
+       CORE LAYOUT & ROMANTIC NIGHT-SKY STYLING
+       ========================================= */
+    * {
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    html, body {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      min-height: 100dvh;
+      overflow-x: hidden;
+      background: #060412;
+      color: #fff6f9;
+      font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+    }
+
+    /* Fixed full-screen canvases */
+    #skyCanvas {
+      position: fixed;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    #fxCanvas {
+      position: fixed;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 40;
+      pointer-events: none;
+    }
+
+    /* =========================================
+       PROMINENT LUMINOUS 27.11.2005 MOON LAYER
+       ========================================= */
+    #moonShowcase {
+      position: fixed;
+      z-index: 5;
+      pointer-events: none;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      transition: top 0.85s cubic-bezier(0.22, 1, 0.36, 1),
+                  left 0.85s cubic-bezier(0.22, 1, 0.36, 1),
+                  transform 0.85s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    /* Stage 1: Upper right, glowing brightly */
+    #moonShowcase.stage-1-pos {
+      top: 52px;
+      left: 78%;
+      transform: translateX(-50%) scale(0.76);
+    }
+
+    /* Stage 2-4: Centered prominent luminous moon above card */
+    #moonShowcase.stage-center-pos {
+      top: 22px;
+      left: 50%;
+      transform: translateX(-50%) scale(1);
+    }
+
+    .moon-orb-wrap {
+      position: relative;
+      width: 156px;
+      height: 156px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      animation: moonFloat 5.5s ease-in-out infinite;
+    }
+
+    @media (min-width: 640px) {
+      .moon-orb-wrap {
+        width: 176px;
+        height: 176px;
+      }
+    }
+
+    @keyframes moonFloat {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-6px); }
+    }
+
+    /* Strong multi-layered pulsing bright moonlight aura */
+    .moon-aura-outer {
+      position: absolute;
+      inset: -65%;
+      border-radius: 9999px;
+      background: radial-gradient(
+        circle at 42% 50%,
+        rgba(255, 255, 255, 0.58) 0%,
+        rgba(215, 235, 255, 0.38) 24%,
+        rgba(170, 210, 255, 0.18) 50%,
+        rgba(255, 165, 210, 0.06) 72%,
+        rgba(0, 0, 0, 0) 100%
+      );
+      filter: blur(18px);
+      animation: moonPulseAura 4s ease-in-out infinite;
+    }
+
+    .moon-aura-inner {
+      position: absolute;
+      inset: -18%;
+      border-radius: 9999px;
+      background: radial-gradient(
+        circle at 32% 50%,
+        rgba(255, 255, 255, 0.72) 0%,
+        rgba(220, 238, 255, 0.32) 45%,
+        rgba(180, 215, 255, 0) 78%
+      );
+      filter: blur(10px);
+      animation: moonPulseAura 3.2s ease-in-out infinite alternate;
+    }
+
+    @keyframes moonPulseAura {
+      0%, 100% {
+        opacity: 0.85;
+        transform: scale(0.97);
+      }
+      50% {
+        opacity: 1;
+        transform: scale(1.06);
+      }
+    }
+
+    /* Exact uploaded moon image with bright luminous filter & screen blend */
+    .moon-visual {
+      position: relative;
+      z-index: 2;
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      border-radius: 9999px;
+      mix-blend-mode: screen;
+      filter: brightness(1.35) contrast(1.1)
+              drop-shadow(0 0 35px rgba(255, 255, 255, 0.95))
+              drop-shadow(0 0 80px rgba(180, 215, 255, 0.75));
+    }
+
+    /* Subtle date caption under moon */
+    .moon-date-label {
+      margin-top: 6px;
+      font-size: 11px;
+      letter-spacing: 0.24em;
+      font-weight: 600;
+      color: rgba(235, 244, 255, 0.92);
+      text-shadow: 0 0 12px rgba(200, 228, 255, 0.85), 0 0 24px rgba(255, 255, 255, 0.5);
+    }
+
+    /* =========================================
+       GLASSMORPHISM CARDS & BUTTONS
+       ========================================= */
+    .glass-card {
+      background: linear-gradient(155deg, rgba(35, 18, 56, 0.74), rgba(14, 9, 32, 0.86));
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      border: 1px solid rgba(255, 198, 218, 0.24);
+      box-shadow:
+        0 20px 55px rgba(4, 2, 14, 0.72),
+        inset 0 1px 1px rgba(255, 255, 255, 0.16),
+        0 0 38px rgba(255, 92, 141, 0.16);
+    }
+
+    /* Prominent Glowing Special Line: "Sen men uchun erkatoy qizaloqsan 💖" */
+    .erkatoy-glow-box {
+      position: relative;
+      background: linear-gradient(135deg, rgba(255, 79, 135, 0.22), rgba(255, 200, 120, 0.14), rgba(255, 79, 135, 0.22));
+      border: 1px solid rgba(255, 175, 205, 0.48);
+      box-shadow:
+        0 0 24px rgba(255, 85, 145, 0.35),
+        inset 0 0 18px rgba(255, 190, 215, 0.18);
+      animation: erkatoyBoxPulse 2.4s ease-in-out infinite;
+    }
+
+    @keyframes erkatoyBoxPulse {
+      0%, 100% {
+        box-shadow: 0 0 18px rgba(255, 85, 145, 0.32), inset 0 0 14px rgba(255, 190, 215, 0.15);
+        border-color: rgba(255, 175, 205, 0.45);
+      }
+      50% {
+        box-shadow: 0 0 36px rgba(255, 105, 165, 0.65), 0 0 60px rgba(255, 200, 130, 0.28), inset 0 0 22px rgba(255, 220, 235, 0.28);
+        border-color: rgba(255, 220, 235, 0.82);
+      }
+    }
+
+    .erkatoy-glow-text {
+      color: #fff9fc;
+      text-shadow:
+        0 0 8px rgba(255, 255, 255, 0.95),
+        0 0 18px rgba(255, 95, 155, 0.95),
+        0 0 34px rgba(255, 65, 135, 0.85),
+        0 0 54px rgba(255, 205, 115, 0.65);
+      animation: neonHeartShimmer 2.2s ease-in-out infinite alternate;
+    }
+
+    @keyframes neonHeartShimmer {
+      0% {
+        text-shadow:
+          0 0 6px rgba(255, 255, 255, 0.9),
+          0 0 16px rgba(255, 95, 155, 0.85),
+          0 0 30px rgba(255, 65, 135, 0.72),
+          0 0 46px rgba(255, 205, 115, 0.5);
+        transform: scale(1);
+      }
+      100% {
+        text-shadow:
+          0 0 10px rgba(255, 255, 255, 1),
+          0 0 24px rgba(255, 115, 175, 1),
+          0 0 44px rgba(255, 75, 145, 0.95),
+          0 0 68px rgba(255, 215, 130, 0.85);
+        transform: scale(1.025);
+      }
+    }
+
+    /* Romantic Glowing Primary Button */
+    .btn-love {
+      background: linear-gradient(135deg, #ff4f87 0%, #ff758f 50%, #e0437c 100%);
+      box-shadow:
+        0 10px 28px rgba(255, 79, 135, 0.45),
+        inset 0 1px 1px rgba(255, 255, 255, 0.35);
+      transition: transform 0.22s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.22s ease;
+    }
+
+    .btn-love:hover {
+      box-shadow:
+        0 14px 36px rgba(255, 79, 135, 0.65),
+        inset 0 1px 2px rgba(255, 255, 255, 0.45);
+      transform: translateY(-2px) scale(1.02);
+    }
+
+    .btn-love:active {
+      transform: scale(0.96);
+    }
+
+    @keyframes pulseGlow {
+      0%, 100% {
+        box-shadow: 0 8px 26px rgba(255, 79, 135, 0.45), 0 0 0 0 rgba(255, 92, 141, 0.45);
+      }
+      50% {
+        box-shadow: 0 12px 34px rgba(255, 79, 135, 0.72), 0 0 0 12px rgba(255, 92, 141, 0);
+      }
+    }
+
+    .pulse-love {
+      animation: pulseGlow 2.4s infinite ease-in-out;
+    }
+
+    /* Subtle Glass Button */
+    .btn-glass {
+      background: rgba(34, 18, 54, 0.78);
+      border: 1px solid rgba(255, 210, 225, 0.35);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45);
+      transition: background 0.2s ease, transform 0.22s cubic-bezier(0.34, 1.56, 0.64, 1), left 0.25s ease, top 0.25s ease;
+    }
+
+    .btn-glass:hover {
+      background: rgba(52, 26, 78, 0.88);
+    }
+
+    /* Stage Transitions */
+    .stage {
+      display: none;
+      opacity: 0;
+      transform: translateY(18px) scale(0.98);
+      transition: opacity 0.6s ease, transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .stage.active {
+      display: flex;
+    }
+
+    .stage.visible {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+
+    /* Shimmer text accent */
+    .text-shimmer {
+      background: linear-gradient(90deg, #fff5f8 0%, #ffd2df 35%, #ffe6b8 50%, #ffd2df 65%, #fff5f8 100%);
+      background-size: 200% auto;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: shimmerText 5s linear infinite;
+    }
+
+    @keyframes shimmerText {
+      to { background-position: 200% center; }
+    }
+
+    /* Place Chip styling */
+    .place-chip {
+      background: rgba(255, 255, 255, 0.07);
+      border: 1px solid rgba(255, 198, 218, 0.22);
+      transition: all 0.22s ease;
+    }
+
+    .place-chip.selected {
+      background: linear-gradient(135deg, rgba(255, 79, 135, 0.38), rgba(243, 198, 182, 0.28));
+      border-color: rgba(255, 132, 172, 0.9);
+      box-shadow: 0 0 18px rgba(255, 92, 141, 0.35);
+      color: #ffffff;
+      transform: translateY(-1px);
+    }
+
+    /* Custom Dark Inputs */
+    .romantic-input {
+      background: rgba(12, 7, 26, 0.65);
+      border: 1px solid rgba(255, 198, 218, 0.28);
+      color: #fff6f9;
+      color-scheme: dark;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .romantic-input:focus {
+      outline: none;
+      border-color: #ff759f;
+      box-shadow: 0 0 0 3px rgba(255, 92, 141, 0.25);
+    }
+
+    /* Luxury Digital Love Ticket */
+    .love-ticket {
+      position: relative;
+      background: linear-gradient(145deg, rgba(46, 20, 68, 0.88), rgba(18, 9, 36, 0.94));
+      border: 1px solid rgba(255, 210, 180, 0.42);
+      box-shadow:
+        0 24px 60px rgba(0, 0, 0, 0.68),
+        0 0 46px rgba(255, 92, 141, 0.28),
+        inset 0 1px 1px rgba(255, 240, 230, 0.28);
+    }
+
+    .ticket-divider {
+      position: relative;
+      border-top: 1.5px dashed rgba(255, 208, 222, 0.34);
+    }
+
+    .ticket-divider::before,
+    .ticket-divider::after {
+      content: '';
+      position: absolute;
+      top: -11px;
+      width: 22px;
+      height: 22px;
+      border-radius: 9999px;
+      background: #100921;
+      border: 1px solid rgba(255, 210, 180, 0.28);
+    }
+
+    .ticket-divider::before { left: -34px; }
+    .ticket-divider::after { right: -34px; }
+
+    /* Archery Canvas touch prevention */
+    #gameCanvas {
+      touch-action: none;
+      user-select: none;
+      -webkit-user-select: none;
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
+
+    /* Floating Toast */
+    #toastBox {
+      transition: opacity 0.3s ease, transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+  </style>
+</head>
+<body class="relative min-h-[100dvh] w-full flex flex-col">
+
+  <!-- Background Night Sky (Stars & Shooting Stars) -->
+  <canvas id="skyCanvas" aria-hidden="true"></canvas>
+
+  <!-- Prominent Luminous 27.11.2005 Moon Showcase (Exact image_a74a7e.png + Canvas Fallback) -->
+  <div id="moonShowcase" class="stage-1-pos" aria-hidden="true">
+    <div class="moon-orb-wrap">
+      <div class="moon-aura-outer"></div>
+      <div class="moon-aura-inner"></div>
+      <!-- Primary Uploaded Moon Image -->
+      <img id="moonImg" src="image_a74a7e.png" alt="27.11.2005 Oy tasviri" class="moon-visual" />
+      <!-- High-detail Procedural Fallback Canvas (auto-shown if external image fails) -->
+      <canvas id="moonFallbackCanvas" width="360" height="360" class="moon-visual hidden"></canvas>
+    </div>
+    <span class="moon-date-label">27.11.2005</span>
+  </div>
+
+  <!-- Celebratory Particles / Hearts / Fireworks Canvas -->
+  <canvas id="fxCanvas" aria-hidden="true"></canvas>
+
+  <!-- Top Utility Bar: Sound Toggle -->
+  <header class="fixed top-0 left-0 right-0 z-30 flex items-center justify-end px-4 pt-3 pb-2 pointer-events-none">
+    <button id="soundToggleBtn" type="button" aria-label="Ovozni yoqish yoki o'chirish"
+      class="pointer-events-auto w-9 h-9 rounded-full flex items-center justify-center bg-black/35 backdrop-blur-md border border-pink-200/25 text-pink-100 hover:bg-white/10 active:scale-95 transition">
+      <span id="soundIcon" class="text-sm">🔊</span>
+    </button>
+  </header>
+
+  <!-- Reusable Toast Notification (Never uses alert) -->
+  <div id="toastBox" class="fixed top-14 left-1/2 -translate-x-1/2 z-50 pointer-events-none opacity-0 -translate-y-2 max-w-[90vw]">
+    <div id="toastContent" class="px-4 py-2.5 rounded-full bg-rose-950/90 border border-pink-300/40 backdrop-blur-md text-xs sm:text-sm font-medium text-pink-50 shadow-2xl text-center whitespace-nowrap">
+      Biroz qoldi, yana urinib ko'r! 💕
+    </div>
+  </div>
+
+  <!-- =========================================================
+       STAGE 1: ARCHERY MINI-GAME ("Yurakni nishonga ol")
+       ========================================================= -->
+  <section id="stage1" class="stage active visible relative z-10 w-full h-[100dvh] flex-col items-center justify-between overflow-hidden">
+    <!-- Stage 1 Header -->
+    <div class="w-full pt-12 px-5 text-center pointer-events-none select-none z-20">
+      <h1 class="font-serif text-2xl sm:text-3xl font-bold text-shimmer drop-shadow-[0_2px_14px_rgba(255,105,155,0.45)]">
+        Sevinchim uchun maxsus sovg'a ✨
+      </h1>
+      <p id="archeryHint" class="mt-1.5 text-xs sm:text-sm text-pink-100/90 font-medium">
+        Kamonni tortib yurakka o'q uz! 💘
+      </p>
+    </div>
+
+    <!-- Full Interactive Archery Canvas -->
+    <div id="gameContainer" class="relative w-full flex-1">
+      <canvas id="gameCanvas"></canvas>
+    </div>
+
+    <!-- Bottom Subtle Helper -->
+    <div class="pb-5 px-4 text-center pointer-events-none select-none z-20">
+      <span class="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-white/5 border border-pink-200/15 text-[11px] sm:text-xs text-pink-100/80 backdrop-blur-sm">
+        <span>👇</span> Pastga tortib qo'yib yubor yoki yurakka qarab bos
+      </span>
+    </div>
+  </section>
+
+  <!-- =========================================================
+       STAGE 2: BIRTHDAY GREETING, GLOWING LINE & RUNAWAY BUTTON
+       ========================================================= -->
+  <section id="stage2" class="stage relative z-10 w-full min-h-[100dvh] flex-col items-center justify-end sm:justify-center px-4 pt-56 sm:pt-60 pb-10">
+    <!-- Main Birthday Glass Card -->
+    <div class="glass-card w-full max-w-md rounded-3xl p-6 sm:p-7 text-center relative overflow-hidden">
+      <!-- Subtle top rose glow -->
+      <div class="absolute -top-16 left-1/2 -translate-x-1/2 w-56 h-32 bg-pink-500/20 blur-3xl pointer-events-none"></div>
+
+      <!-- Updated Title -->
+      <h2 class="font-serif text-2xl sm:text-3xl font-bold leading-snug text-shimmer mb-3">
+        Tug'ilgan kuning bilan, Sevinchim! 🎂✨
+      </h2>
+
+      <!-- Updated Main Birthday Message -->
+      <p class="text-sm sm:text-base leading-relaxed text-pink-50/95 font-medium mb-5">
+        Ota-onang va barchamizning baxtimiz uchun har doim baxt va quvonchga to'lib yur!
+      </p>
+
+      <!-- VERY PROMINENT BRIGHT GLOWING SPECIAL PHRASE -->
+      <div class="erkatoy-glow-box rounded-2xl px-4 py-4 mb-5">
+        <p class="erkatoy-glow-text font-serif text-xl sm:text-2xl font-bold tracking-wide leading-snug">
+          Sen men uchun erkatoy qizaloqsan 💖
+        </p>
+      </div>
+
+      <!-- Divider -->
+      <div class="w-24 h-px mx-auto bg-gradient-to-r from-transparent via-pink-300/50 to-transparent mb-4"></div>
+
+      <!-- Date Invitation Section -->
+      <div class="space-y-4">
+        <p class="font-serif italic text-lg sm:text-xl text-rose-100">
+          Sen bilan uchrashishni xohlayman... 💌
+        </p>
+
+        <div id="inviteButtonsWrap" class="flex flex-col sm:flex-row items-center justify-center gap-3 pt-1">
+          <button id="yesMeetBtn" type="button"
+            class="btn-love pulse-love w-full sm:w-auto min-w-[180px] px-6 py-3.5 rounded-2xl text-white font-semibold text-base tracking-wide flex items-center justify-center gap-2 cursor-pointer">
+            <span>Uchrashamiz</span>
+            <span class="text-lg">❤️</span>
+          </button>
+
+          <button id="noMeetBtn" type="button"
+            class="btn-glass w-full sm:w-auto min-w-[148px] px-5 py-3.5 rounded-2xl text-pink-100 font-medium text-sm cursor-pointer select-none inline-flex items-center justify-center">
+            Xohlamayman
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================
+       STAGE 3 & 4: MEETING PLANNER & CONFIRMED ROMANTIC TICKET
+       ========================================================= -->
+  <section id="stage3" class="stage relative z-10 w-full min-h-[100dvh] flex-col items-center justify-end sm:justify-center px-4 pt-56 sm:pt-60 pb-10">
+
+    <!-- Step 3: Simplified Date Planner Form Card -->
+    <div id="plannerCard" class="glass-card w-full max-w-md rounded-3xl p-6 sm:p-7 relative overflow-hidden">
+      <div class="text-center mb-5">
+        <span class="inline-block px-3 py-1 rounded-full bg-rose-500/20 border border-rose-300/35 text-[11px] font-semibold text-rose-200 mb-2">
+          Yuragingni zabt etdim 💘
+        </span>
+        <h2 class="font-serif text-2xl sm:text-3xl font-bold text-shimmer">
+          Uchrashuvimizni rejalashtiramiz
+        </h2>
+        <p class="text-xs sm:text-sm text-pink-100/80 mt-1">
+          O'zingga qulay sana, soat va joyni tanla, Sevinchim ✨
+        </p>
+      </div>
+
+      <form id="datePlannerForm" class="space-y-4">
+        <!-- Date & Time Row -->
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label for="dateInput" class="block text-xs font-semibold text-pink-200/90 mb-1.5 pl-1">
+              📅 Sana
+            </label>
+            <input id="dateInput" type="date" value="2026-11-27" required
+              class="romantic-input w-full rounded-2xl px-3.5 py-3 text-sm font-medium" />
+          </div>
+
+          <div>
+            <label for="timeInput" class="block text-xs font-semibold text-pink-200/90 mb-1.5 pl-1">
+              ⏰ Soat
+            </label>
+            <input id="timeInput" type="time" value="18:00" required
+              class="romantic-input w-full rounded-2xl px-3.5 py-3 text-sm font-medium" />
+          </div>
+        </div>
+
+        <!-- ONLY 3 Location Chips + Custom Wish Input -->
+        <div>
+          <label class="block text-xs font-semibold text-pink-200/90 mb-2 pl-1">
+            📍 Qayerda uchrashamiz?
+          </label>
+          <div id="placeChips" class="grid grid-cols-3 gap-2 mb-3">
+            <button type="button" data-place="🌳 Bog'da" class="place-chip selected rounded-2xl px-2 py-3 text-xs sm:text-sm font-medium text-pink-100 text-center cursor-pointer">
+              🌳 Bog'da
+            </button>
+            <button type="button" data-place="🍽️ Restoranda" class="place-chip rounded-2xl px-2 py-3 text-xs sm:text-sm font-medium text-pink-100 text-center cursor-pointer">
+              🍽️ Restoranda
+            </button>
+            <button type="button" data-place="🚶‍♀️ Sayrda" class="place-chip rounded-2xl px-2 py-3 text-xs sm:text-sm font-medium text-pink-100 text-center cursor-pointer">
+              🚶‍♀️ Sayrda
+            </button>
+          </div>
+
+          <label for="customPlaceInput" class="block text-xs font-semibold text-pink-200/85 mb-1.5 pl-1">
+            💌 O'zingiz xohlagan taklif
+          </label>
+          <input id="customPlaceInput" type="text" placeholder="Yoki o'zingiz xohlagan joy / taklifni yozing..."
+            class="romantic-input w-full rounded-2xl px-4 py-3 text-sm placeholder:text-pink-200/45" />
+        </div>
+
+        <!-- Confirm Button -->
+        <button type="submit"
+          class="btn-love w-full mt-2 py-3.5 px-6 rounded-2xl text-white font-semibold text-base tracking-wide flex items-center justify-center gap-2 cursor-pointer">
+          <span>Uchrashuvni belgilash</span>
+          <span>✨</span>
+        </button>
+      </form>
+    </div>
+
+    <!-- Step 4: Confirmed Romantic Digital Ticket (NO Send/Share/Copy Buttons) -->
+    <div id="ticketCard" class="hidden w-full max-w-md flex-col items-center">
+      <div class="love-ticket w-full rounded-3xl p-6 sm:p-7 overflow-hidden">
+        <!-- Top Ticket Header -->
+        <div class="flex items-center justify-between mb-4">
+          <span class="text-[11px] uppercase tracking-[0.2em] text-amber-200/95 font-semibold">
+            Uchrashuv Tasdiqlandi ✨
+          </span>
+          <span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-amber-200/15 border border-amber-200/35 text-[11px] text-amber-100">
+            ☾ 27.11.2005
+          </span>
+        </div>
+
+        <!-- Recipient Title -->
+        <div class="text-center mb-5">
+          <p class="text-xs text-pink-200/80 mb-1">Maxsus Uchrashuv Taklifnomasi</p>
+          <h3 class="font-serif text-2xl sm:text-3xl font-bold text-shimmer">
+            Sevinchim bilan uchrashuv ❤️
+          </h3>
+        </div>
+
+        <!-- Dashed Notched Divider -->
+        <div class="ticket-divider my-5"></div>
+
+        <!-- Ticket Details -->
+        <div class="space-y-3 text-sm">
+          <div class="flex items-center justify-between bg-white/5 rounded-2xl px-4 py-3 border border-pink-200/12">
+            <span class="text-pink-200/80 flex items-center gap-2"><span>📅</span> Sana</span>
+            <span id="ticketDate" class="font-semibold text-white">27-Noyabr, 2026</span>
+          </div>
+
+          <div class="flex items-center justify-between bg-white/5 rounded-2xl px-4 py-3 border border-pink-200/12">
+            <span class="text-pink-200/80 flex items-center gap-2"><span>⏰</span> Soat</span>
+            <span id="ticketTime" class="font-semibold text-white">18:00</span>
+          </div>
+
+          <div class="flex items-center justify-between bg-white/5 rounded-2xl px-4 py-3 border border-pink-200/12 gap-3">
+            <span class="text-pink-200/80 flex items-center gap-2 shrink-0"><span>📍</span> Manzil</span>
+            <span id="ticketPlace" class="font-semibold text-white text-right">🌳 Bog'da</span>
+          </div>
+
+          <!-- Optional Custom Suggestion Row (Shown if Sevinch wrote a custom wish) -->
+          <div id="ticketCustomRow" class="hidden flex-col gap-1 bg-pink-500/12 rounded-2xl px-4 py-3 border border-pink-300/25">
+            <span class="text-xs text-pink-200/85 font-semibold flex items-center gap-1.5"><span>💌</span> Maxsus taklif</span>
+            <span id="ticketCustomText" class="text-sm font-medium text-white leading-snug"></span>
+          </div>
+        </div>
+
+        <!-- Glowing Romantic Closing Line -->
+        <div class="mt-6 text-center space-y-2">
+          <p class="erkatoy-glow-text font-serif text-base sm:text-lg font-bold">
+            Seni intizorlik bilan kutaman, erkatoy qizalog'im! 💖
+          </p>
+          <p class="text-xs text-pink-200/75">
+            Uchrashuvimiz unutilmas va baxtga to'la bo'ladi 🌙✨
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    /* =========================================================================
+       SEVINCHIM'S BIRTHDAY & ROMANTIC DATE INVITATION APP
+       1. Exact 27.11.2005 Left-Lit Waning Crescent Moon (image_a74a7e.png + Canvas fallback)
+          with bright pulsing luminous glow
+       2. Twinkling Starry Night Sky + Shooting Stars + Floating Hearts
+       3. Interactive Mobile-First Archery Mini-Game
+       4. Updated Uzbek Greeting + Glowing "Sen men uchun erkatoy qizaloqsan 💖"
+       5. Un-disappearing Runaway "Xohlamayman" Button (detached to document.body)
+       6. Simplified 3-Place Date Planner + Custom Wish Input + Clean Final Ticket
+       ========================================================================= */
+
+    (function () {
+      'use strict';
+
+      /* -----------------------------------------
+         1. AUDIO ENGINE (Optional, gentle Tone.js)
+         ----------------------------------------- */
+      let soundEnabled = true;
+      let audioReady = false;
+      let synth = null;
+
+      function initAudio() {
+        if (audioReady || !soundEnabled) return;
+        try {
+          if (typeof Tone !== 'undefined') {
+            Tone.start();
+            synth = new Tone.PolySynth(Tone.Synth, {
+              oscillator: { type: 'sine' },
+              envelope: { attack: 0.02, decay: 0.25, sustain: 0.12, release: 1.2 },
+            }).toDestination();
+            synth.volume.value = -10;
+            audioReady = true;
+          }
+        } catch (err) {
+          // Silently ignore audio errors on restricted devices
+        }
+      }
+
+      function playSound(type) {
+        if (!soundEnabled) return;
+        initAudio();
+        if (!synth) return;
+        try {
+          const now = Tone.now();
+          if (type === 'shoot') {
+            synth.triggerAttackRelease('E4', '16n', now);
+            synth.triggerAttackRelease('B4', '16n', now + 0.05);
+          } else if (type === 'hit') {
+            synth.triggerAttackRelease(['C5', 'E5', 'G5', 'B5'], '4n', now);
+            synth.triggerAttackRelease(['D5', 'F#5', 'A5', 'D6'], '2n', now + 0.22);
+          } else if (type === 'boing') {
+            synth.triggerAttackRelease('G4', '32n', now);
+            synth.triggerAttackRelease('C5', '32n', now + 0.06);
+          } else if (type === 'celebrate') {
+            synth.triggerAttackRelease(['F4', 'A4', 'C5', 'E5'], '4n', now);
+            synth.triggerAttackRelease(['G4', 'B4', 'D5', 'G5'], '2n', now + 0.2);
+          }
+        } catch (e) {
+          // Safe fallback
+        }
+      }
+
+      const soundToggleBtn = document.getElementById('soundToggleBtn');
+      const soundIcon = document.getElementById('soundIcon');
+      soundToggleBtn.addEventListener('click', () => {
+        soundEnabled = !soundEnabled;
+        soundIcon.textContent = soundEnabled ? '🔊' : '🔇';
+        if (soundEnabled) initAudio();
+      });
+
+      /* -----------------------------------------
+         2. TOAST HELPER (No alert/confirm)
+         ----------------------------------------- */
+      let toastTimer = null;
+      const toastBox = document.getElementById('toastBox');
+      const toastContent = document.getElementById('toastContent');
+
+      function showToast(msg, duration = 2300) {
+        toastContent.textContent = msg;
+        toastBox.classList.remove('opacity-0', '-translate-y-2');
+        toastBox.classList.add('opacity-100', 'translate-y-0');
+        clearTimeout(toastTimer);
+        toastTimer = setTimeout(() => {
+          toastBox.classList.remove('opacity-100', 'translate-y-0');
+          toastBox.classList.add('opacity-0', '-translate-y-2');
+        }, duration);
+      }
+
+      /* -----------------------------------------
+         3. MOON IMAGE + HIGH-DETAIL FALLBACK CANVAS
+            Matches image_a74a7e.png: ~25% left-lit waning crescent
+            with detailed craters and dark right side
+         ----------------------------------------- */
+      const moonImg = document.getElementById('moonImg');
+      const moonFallbackCanvas = document.getElementById('moonFallbackCanvas');
+      const moonShowcase = document.getElementById('moonShowcase');
+
+      function drawFallbackCrescentMoon(canvas) {
+        const size = canvas.width;
+        const c = canvas.getContext('2d');
+        const cx = size / 2;
+        const cy = size / 2;
+        const r = size * 0.44;
+
+        c.clearRect(0, 0, size, size);
+
+        // Clip to circular moon sphere
+        c.save();
+        c.beginPath();
+        c.arc(cx, cy, r, 0, Math.PI * 2);
+        c.clip();
+
+        // Deep dark shadowed right side
+        c.fillStyle = '#04040a';
+        c.fillRect(cx - r, cy - r, r * 2, r * 2);
+
+        // Prepare textured illuminated lunar surface on offscreen canvas
+        const lit = document.createElement('canvas');
+        lit.width = size;
+        lit.height = size;
+        const lc = lit.getContext('2d');
+
+        // Silvery-white bright lunar base matching photo tones
+        const baseGrad = lc.createRadialGradient(cx - r * 0.65, cy - r * 0.1, r * 0.08, cx - r * 0.1, cy, r * 1.15);
+        baseGrad.addColorStop(0, '#f4f5f8');
+        baseGrad.addColorStop(0.35, '#d5d4d8');
+        baseGrad.addColorStop(0.7, '#9c999f');
+        baseGrad.addColorStop(1, '#58555c');
+        lc.fillStyle = baseGrad;
+        lc.beginPath();
+        lc.arc(cx, cy, r, 0, Math.PI * 2);
+        lc.fill();
+
+        // Realistic dark maria (Oceanus Procellarum on left-upper limb)
+        const maria = [
+          { x: -0.58, y: -0.34, rx: 0.34, ry: 0.28, a: 0.36, rot: -0.35 },
+          { x: -0.72, y: 0.02, rx: 0.22, ry: 0.26, a: 0.28, rot: 0.1 },
+          { x: -0.45, y: -0.15, rx: 0.28, ry: 0.35, a: 0.32, rot: -0.2 },
+          { x: -0.60, y: 0.36, rx: 0.24, ry: 0.18, a: 0.20, rot: 0.25 },
+        ];
+        maria.forEach(m => {
+          lc.fillStyle = `rgba(38, 36, 44, ${m.a})`;
+          lc.beginPath();
+          lc.ellipse(cx + m.x * r, cy + m.y * r, m.rx * r, m.ry * r, m.rot, 0, Math.PI * 2);
+          lc.fill();
+        });
+
+        // Detailed craters along the bright left crescent (matching image_a74a7e.png)
+        const craters = [
+          { x: -0.84, y: -0.18, cr: 0.065, d: 0.45 }, // Grimaldi-like dark crater near left limb
+          { x: -0.68, y: 0.28, cr: 0.075, d: 0.28 },
+          { x: -0.76, y: 0.14, cr: 0.055, d: 0.30 },
+          { x: -0.55, y: 0.56, cr: 0.085, d: 0.24 },
+          { x: -0.62, y: -0.56, cr: 0.060, d: 0.26 },
+          { x: -0.78, y: -0.38, cr: 0.045, d: 0.28 },
+          { x: -0.65, y: 0.04, cr: 0.040, d: 0.25 },
+          { x: -0.52, y: 0.72, cr: 0.055, d: 0.22 },
+          { x: -0.46, y: -0.68, cr: 0.050, d: 0.24 },
+          { x: -0.86, y: 0.08, cr: 0.042, d: 0.30 },
+        ];
+        craters.forEach(cr => {
+          const x = cx + cr.x * r;
+          const y = cy + cr.y * r;
+          const rad = cr.cr * r;
+          lc.fillStyle = `rgba(42, 40, 48, ${cr.d})`;
+          lc.beginPath();
+          lc.arc(x, y, rad, 0, Math.PI * 2);
+          lc.fill();
+          lc.strokeStyle = 'rgba(255, 255, 255, 0.35)';
+          lc.lineWidth = 1.5;
+          lc.beginPath();
+          lc.arc(x - rad * 0.15, y - rad * 0.1, rad * 0.9, Math.PI * 0.7, Math.PI * 1.7);
+          lc.stroke();
+        });
+
+        // Carve out the shadowed right ~75% to leave exact ~25% left waning crescent
+        lc.globalCompositeOperation = 'destination-out';
+        lc.filter = 'blur(7px)';
+        lc.beginPath();
+        lc.ellipse(cx + r * 0.36, cy, r * 0.88, r * 1.06, 0.14, 0, Math.PI * 2);
+        lc.fill();
+
+        // Draw carved illuminated crescent onto main canvas
+        c.drawImage(lit, 0, 0);
+
+        // Crisp luminous silver-white left rim
+        c.strokeStyle = 'rgba(255, 255, 255, 0.88)';
+        c.lineWidth = 2.5;
+        c.beginPath();
+        c.arc(cx, cy, r - 1, Math.PI * 0.56, Math.PI * 1.44);
+        c.stroke();
+
+        c.restore();
+      }
+
+      // Draw fallback immediately so it is ready if image fails
+      drawFallbackCrescentMoon(moonFallbackCanvas);
+
+      function activateMoonFallback() {
+        moonImg.classList.add('hidden');
+        moonFallbackCanvas.classList.remove('hidden');
+      }
+
+      moonImg.addEventListener('error', activateMoonFallback);
+      // Also check if image already failed to load before listener attached
+      if (moonImg.complete && moonImg.naturalWidth === 0) {
+        activateMoonFallback();
+      }
+
+      /* -----------------------------------------
+         4. NIGHT SKY BACKGROUND CANVAS
+         ----------------------------------------- */
+      const skyCanvas = document.getElementById('skyCanvas');
+      const skyCtx = skyCanvas.getContext('2d');
+      let skyW = window.innerWidth;
+      let skyH = window.innerHeight;
+
+      let stars = [];
+      let shootingStars = [];
+      let ambientHearts = [];
+
+      function initSkyEntities() {
+        const count = Math.min(140, Math.floor((skyW * skyH) / 5000));
+        stars = [];
+        for (let i = 0; i < count; i++) {
+          stars.push({
+            x: Math.random() * skyW,
+            y: Math.random() * skyH,
+            r: Math.random() * 1.6 + 0.35,
+            phase: Math.random() * Math.PI * 2,
+            speed: 0.014 + Math.random() * 0.032,
+            tint: Math.random() > 0.7 ? '#ffd9e6' : (Math.random() > 0.45 ? '#dceeff' : '#ffffff'),
+          });
+        }
+
+        ambientHearts = [];
+        for (let i = 0; i < 14; i++) {
+          ambientHearts.push({
+            x: Math.random() * skyW,
+            y: Math.random() * skyH,
+            size: 5 + Math.random() * 7,
+            vy: -(0.18 + Math.random() * 0.32),
+            vx: (Math.random() - 0.5) * 0.25,
+            alpha: 0.09 + Math.random() * 0.16,
+            wobble: Math.random() * Math.PI * 2,
+          });
+        }
+      }
+
+      function resizeSkyCanvas() {
+        const dpr = Math.min(window.devicePixelRatio || 1, 2);
+        skyW = window.innerWidth;
+        skyH = window.innerHeight;
+        skyCanvas.width = skyW * dpr;
+        skyCanvas.height = skyH * dpr;
+        skyCtx.setTransform(dpr, 0, 0, dpr, 0, 0);
+        initSkyEntities();
+      }
+
+      function drawMiniHeart(ctx, x, y, size, color, alpha) {
+        ctx.save();
+        ctx.translate(x, y);
+        ctx.globalAlpha = alpha;
+        ctx.fillStyle = color;
+        ctx.beginPath();
+        const s = size * 0.5;
+        ctx.moveTo(0, s * 0.7);
+        ctx.bezierCurveTo(-s * 1.2, -s * 0.2, -s * 0.9, -s * 1.25, 0, -s * 0.45);
+        ctx.bezierCurveTo(s * 0.9, -s * 1.25, s * 1.2, -s * 0.2, 0, s * 0.7);
+        ctx.fill();
+        ctx.restore();
+      }
+
+      function spawnShootingStar() {
+        if (shootingStars.length > 2) return;
+        shootingStars.push({
+          x: Math.random() * skyW * 0.8 + skyW * 0.1,
+          y: Math.random() * skyH * 0.35,
+          vx: 5.2 + Math.random() * 4,
+          vy: 2.1 + Math.random() * 2.4,
+          life: 1,
+        });
+      }
+
+      function renderSky() {
+        // Deep romantic night-sky gradient
+        const grad = skyCtx.createLinearGradient(0, 0, 0, skyH);
+        grad.addColorStop(0, '#050412');
+        grad.addColorStop(0.38, '#130a28');
+        grad.addColorStop(0.75, '#251036');
+        grad.addColorStop(1, '#160822');
+        skyCtx.fillStyle = grad;
+        skyCtx.fillRect(0, 0, skyW, skyH);
+
+        // Soft upper moonlight atmospheric glow illuminating the starry sky
+        const moonGlowX = currentStage === 1 ? skyW * 0.78 : skyW * 0.5;
+        const moonGlowY = currentStage === 1 ? 120 : 105;
+        const atm = skyCtx.createRadialGradient(moonGlowX, moonGlowY, 10, moonGlowX, moonGlowY, Math.max(skyW, skyH) * 0.52);
+        atm.addColorStop(0, 'rgba(200, 228, 255, 0.22)');
+        atm.addColorStop(0.35, 'rgba(145, 185, 255, 0.09)');
+        atm.addColorStop(0.7, 'rgba(255, 92, 141, 0.05)');
+        atm.addColorStop(1, 'rgba(0, 0, 0, 0)');
+        skyCtx.fillStyle = atm;
+        skyCtx.fillRect(0, 0, skyW, skyH);
+
+        // Twinkling Stars
+        for (let i = 0; i < stars.length; i++) {
+          const st = stars[i];
+          st.phase += st.speed;
+          const alpha = 0.25 + 0.75 * (0.5 + 0.5 * Math.sin(st.phase));
+          skyCtx.globalAlpha = alpha;
+          skyCtx.fillStyle = st.tint;
+          skyCtx.beginPath();
+          skyCtx.arc(st.x, st.y, st.r, 0, Math.PI * 2);
+          skyCtx.fill();
+        }
+        skyCtx.globalAlpha = 1;
+
+        // Occasional Shooting Stars
+        if (Math.random() < 0.006) spawnShootingStar();
+        for (let i = shootingStars.length - 1; i >= 0; i--) {
+          const ss = shootingStars[i];
+          ss.x += ss.vx;
+          ss.y += ss.vy;
+          ss.life -= 0.022;
+          if (ss.life <= 0) {
+            shootingStars.splice(i, 1);
+            continue;
+          }
+          const tailGrad = skyCtx.createLinearGradient(ss.x, ss.y, ss.x - ss.vx * 8, ss.y - ss.vy * 8);
+          tailGrad.addColorStop(0, `rgba(255, 250, 240, ${ss.life})`);
+          tailGrad.addColorStop(1, 'rgba(180, 215, 255, 0)');
+          skyCtx.strokeStyle = tailGrad;
+          skyCtx.lineWidth = 1.6;
+          skyCtx.beginPath();
+          skyCtx.moveTo(ss.x, ss.y);
+          skyCtx.lineTo(ss.x - ss.vx * 8, ss.y - ss.vy * 8);
+          skyCtx.stroke();
+        }
+
+        // Floating ambient hearts
+        for (let i = 0; i < ambientHearts.length; i++) {
+          const h = ambientHearts[i];
+          h.y += h.vy;
+          h.wobble += 0.015;
+          h.x += h.vx + Math.sin(h.wobble) * 0.25;
+          if (h.y < -20) {
+            h.y = skyH + 20;
+            h.x = Math.random() * skyW;
+          }
+          drawMiniHeart(skyCtx, h.x, h.y, h.size, '#ff85ad', h.alpha);
+        }
+      }
+
+      /* -----------------------------------------
+         5. CELEBRATION FX CANVAS (Hearts, Petals, Fireworks)
+         ----------------------------------------- */
+      const fxCanvas = document.getElementById('fxCanvas');
+      const fxCtx = fxCanvas.getContext('2d');
+      let fxW = window.innerWidth;
+      let fxH = window.innerHeight;
+      const fxParticles = [];
+
+      function resizeFxCanvas() {
+        const dpr = Math.min(window.devicePixelRatio || 1, 2);
+        fxW = window.innerWidth;
+        fxH = window.innerHeight;
+        fxCanvas.width = fxW * dpr;
+        fxCanvas.height = fxH * dpr;
+        fxCtx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      }
+
+      function spawnCelebrationBurst(cx, cy, count = 55) {
+        const colors = ['#ff4f87', '#ff85b3', '#ffd27d', '#ffe8f0', '#b8dcff', '#ffffff'];
+        for (let i = 0; i < count; i++) {
+          const angle = Math.random() * Math.PI * 2;
+          const speed = 1.8 + Math.random() * 6.8;
+          const kindRoll = Math.random();
+          fxParticles.push({
+            x: cx,
+            y: cy,
+            vx: Math.cos(angle) * speed,
+            vy: Math.sin(angle) * speed - 1.8,
+            gravity: 0.068 + Math.random() * 0.048,
+            size: 5 + Math.random() * 9,
+            color: colors[Math.floor(Math.random() * colors.length)],
+            alpha: 1,
+            decay: 0.011 + Math.random() * 0.012,
+            rot: Math.random() * Math.PI * 2,
+            vRot: (Math.random() - 0.5) * 0.14,
+            kind: kindRoll < 0.48 ? 'heart' : (kindRoll < 0.8 ? 'sparkle' : 'petal'),
+          });
+        }
+      }
+
+      function renderFx() {
+        fxCtx.clearRect(0, 0, fxW, fxH);
+        for (let i = fxParticles.length - 1; i >= 0; i--) {
+          const p = fxParticles[i];
+          p.x += p.vx;
+          p.y += p.vy;
+          p.vy += p.gravity;
+          p.vx *= 0.99;
+          p.rot += p.vRot;
+          p.alpha -= p.decay;
+
+          if (p.alpha <= 0) {
+            fxParticles.splice(i, 1);
+            continue;
+          }
+
+          if (p.kind === 'heart') {
+            drawMiniHeart(fxCtx, p.x, p.y, p.size, p.color, p.alpha);
+          } else if (p.kind === 'petal') {
+            fxCtx.save();
+            fxCtx.translate(p.x, p.y);
+            fxCtx.rotate(p.rot);
+            fxCtx.globalAlpha = p.alpha;
+            fxCtx.fillStyle = p.color;
+            fxCtx.beginPath();
+            fxCtx.ellipse(0, 0, p.size * 0.65, p.size * 0.35, 0, 0, Math.PI * 2);
+            fxCtx.fill();
+            fxCtx.restore();
+          } else {
+            fxCtx.save();
+            fxCtx.globalAlpha = p.alpha;
+            fxCtx.fillStyle = p.color;
+            fxCtx.shadowColor = p.color;
+            fxCtx.shadowBlur = 8;
+            fxCtx.beginPath();
+            fxCtx.arc(p.x, p.y, p.size * 0.28, 0, Math.PI * 2);
+            fxCtx.fill();
+            fxCtx.restore();
+          }
+        }
+      }
+
+      /* -----------------------------------------
+         6. STAGE MANAGEMENT
+         ----------------------------------------- */
+      let currentStage = 1;
+      let ticketFireworksTimer = null;
+
+      function switchStage(nextStage) {
+        const prevEl = document.getElementById(`stage${currentStage}`);
+        const nextEl = document.getElementById(`stage${nextStage}`);
+        if (!nextEl) return;
+
+        currentStage = nextStage;
+
+        // Smoothly move moon to prominent top-center position for stages 2+
+        if (nextStage === 1) {
+          moonShowcase.classList.add('stage-1-pos');
+          moonShowcase.classList.remove('stage-center-pos');
+        } else {
+          moonShowcase.classList.remove('stage-1-pos');
+          moonShowcase.classList.add('stage-center-pos');
+        }
+
+        if (prevEl) {
+          prevEl.classList.remove('visible');
+          setTimeout(() => {
+            prevEl.classList.remove('active');
+          }, 400);
+        }
+
+        setTimeout(() => {
+          nextEl.classList.add('active');
+          requestAnimationFrame(() => {
+            nextEl.classList.add('visible');
+          });
+        }, 300);
+      }
+
+      /* -----------------------------------------
+         7. STAGE 1: ARCHERY MINI-GAME
+         ----------------------------------------- */
+      const gameContainer = document.getElementById('gameContainer');
+      const gameCanvas = document.getElementById('gameCanvas');
+      const gCtx = gameCanvas.getContext('2d');
+
+      let gW = 360;
+      let gH = 500;
+      let gameActive = true;
+      let gameWon = false;
+
+      const target = {
+        x: 180,
+        y: 120,
+        baseY: 120,
+        radius: 34,
+        phase: 0,
+        pulse: 0,
+      };
+
+      const bow = {
+        x: 180,
+        y: 410,
+        pulling: false,
+        pullX: 0,
+        pullY: 0,
+        maxPull: 95,
+        angle: -Math.PI / 2,
+        power: 0,
+        startX: 0,
+        startY: 0,
+        startTime: 0,
+      };
+
+      const arrow = {
+        flying: false,
+        stuck: false,
+        x: 180,
+        y: 410,
+        vx: 0,
+        vy: 0,
+        angle: -Math.PI / 2,
+        trail: [],
+      };
+
+      function resizeGameCanvas() {
+        const rect = gameContainer.getBoundingClientRect();
+        if (rect.width === 0 || rect.height === 0) return;
+        const dpr = Math.min(window.devicePixelRatio || 1, 2);
+        gW = rect.width;
+        gH = rect.height;
+        gameCanvas.width = gW * dpr;
+        gameCanvas.height = gH * dpr;
+        gCtx.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+        bow.x = gW / 2;
+        bow.y = gH - Math.max(78, gH * 0.16);
+        target.baseY = Math.max(82, gH * 0.24);
+        target.radius = Math.min(40, Math.max(30, gW * 0.085));
+        if (!arrow.flying && !arrow.stuck) {
+          arrow.x = bow.x;
+          arrow.y = bow.y;
+        }
+      }
+
+      function getCanvasPoint(e) {
+        const rect = gameCanvas.getBoundingClientRect();
+        const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+        const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+        return {
+          x: clientX - rect.left,
+          y: clientY - rect.top,
+        };
+      }
+
+      function resetArrow() {
+        arrow.flying = false;
+        arrow.stuck = false;
+        arrow.trail = [];
+        arrow.x = bow.x;
+        arrow.y = bow.y;
+        arrow.angle = -Math.PI / 2;
+      }
+
+      function fireArrow(angle, speed) {
+        arrow.flying = true;
+        arrow.stuck = false;
+        arrow.x = bow.x + Math.cos(angle) * 18;
+        arrow.y = bow.y + Math.sin(angle) * 18;
+        arrow.vx = Math.cos(angle) * speed;
+        arrow.vy = Math.sin(angle) * speed;
+        arrow.angle = angle;
+        arrow.trail = [];
+        playSound('shoot');
+      }
+
+      function onAimStart(e) {
+        if (!gameActive || gameWon || arrow.flying) return;
+        e.preventDefault();
+        initAudio();
+        const pt = getCanvasPoint(e);
+        bow.pulling = true;
+        bow.startX = pt.x;
+        bow.startY = pt.y;
+        bow.startTime = performance.now();
+        bow.pullX = 0;
+        bow.pullY = 0;
+        bow.power = 0;
+      }
+
+      function onAimMove(e) {
+        if (!bow.pulling || !gameActive || gameWon) return;
+        e.preventDefault();
+        const pt = getCanvasPoint(e);
+
+        let dx = pt.x - bow.startX;
+        let dy = pt.y - bow.startY;
+        if (dy < 8) dy = 8;
+
+        const dist = Math.hypot(dx, dy);
+        const clamped = Math.min(dist, bow.maxPull);
+        const pullAngle = Math.atan2(dy, dx);
+
+        bow.pullX = Math.cos(pullAngle) * clamped;
+        bow.pullY = Math.sin(pullAngle) * clamped;
+        bow.power = clamped / bow.maxPull;
+        bow.angle = Math.atan2(-bow.pullY, -bow.pullX);
+      }
+
+      function onAimEnd(e) {
+        if (!bow.pulling || !gameActive || gameWon) return;
+        e.preventDefault();
+        bow.pulling = false;
+
+        const elapsed = performance.now() - bow.startTime;
+        const pullDist = Math.hypot(bow.pullX, bow.pullY);
+
+        if (pullDist < 16 && elapsed < 320) {
+          const aimX = target.x + (Math.random() - 0.5) * 16;
+          const aimY = target.y - 16;
+          const autoAngle = Math.atan2(aimY - bow.y, aimX - bow.x);
+          bow.angle = autoAngle;
+          const distToTarget = Math.hypot(aimX - bow.x, aimY - bow.y);
+          const speed = Math.min(20, Math.max(13.5, distToTarget * 0.042));
+          fireArrow(autoAngle, speed);
+        } else if (pullDist >= 16) {
+          const speed = 10.5 + bow.power * 11.5;
+          fireArrow(bow.angle, speed);
+        }
+
+        bow.pullX = 0;
+        bow.pullY = 0;
+        bow.power = 0;
+      }
+
+      gameCanvas.addEventListener('mousedown', onAimStart);
+      window.addEventListener('mousemove', onAimMove);
+      window.addEventListener('mouseup', onAimEnd);
+
+      gameCanvas.addEventListener('touchstart', onAimStart, { passive: false });
+      window.addEventListener('touchmove', onAimMove, { passive: false });
+      window.addEventListener('touchend', onAimEnd, { passive: false });
+
+      function drawGlowingTargetHeart(ctx, x, y, r, pulse) {
+        const scale = 1 + Math.sin(pulse) * 0.06;
+        ctx.save();
+        ctx.translate(x, y);
+        ctx.scale(scale, scale);
+
+        const aura = ctx.createRadialGradient(0, 0, r * 0.2, 0, 0, r * 1.9);
+        aura.addColorStop(0, 'rgba(255, 79, 135, 0.55)');
+        aura.addColorStop(0.55, 'rgba(255, 115, 165, 0.18)');
+        aura.addColorStop(1, 'rgba(255, 79, 135, 0)');
+        ctx.fillStyle = aura;
+        ctx.beginPath();
+        ctx.arc(0, 0, r * 1.9, 0, Math.PI * 2);
+        ctx.fill();
+
+        ctx.beginPath();
+        ctx.moveTo(0, r * 0.85);
+        ctx.bezierCurveTo(-r * 1.35, r * 0.05, -r * 1.15, -r * 1.15, 0, -r * 0.35);
+        ctx.bezierCurveTo(r * 1.15, -r * 1.15, r * 1.35, r * 0.05, 0, r * 0.85);
+        ctx.closePath();
+
+        const heartGrad = ctx.createRadialGradient(-r * 0.28, -r * 0.32, r * 0.1, 0, 0, r * 1.15);
+        heartGrad.addColorStop(0, '#ff9ec2');
+        heartGrad.addColorStop(0.35, '#ff4d84');
+        heartGrad.addColorStop(0.85, '#c9184a');
+        heartGrad.addColorStop(1, '#800f2f');
+
+        ctx.fillStyle = heartGrad;
+        ctx.shadowColor = 'rgba(255, 79, 135, 0.85)';
+        ctx.shadowBlur = 22;
+        ctx.fill();
+
+        ctx.strokeStyle = 'rgba(255, 224, 232, 0.75)';
+        ctx.lineWidth = 2;
+        ctx.stroke();
+
+        ctx.shadowBlur = 0;
+        ctx.fillStyle = 'rgba(255, 255, 255, 0.36)';
+        ctx.beginPath();
+        ctx.ellipse(-r * 0.42, -r * 0.32, r * 0.22, r * 0.12, -0.6, 0, Math.PI * 2);
+        ctx.fill();
+
+        ctx.restore();
+      }
+
+      function drawArrowShape(ctx, x, y, angle) {
+        ctx.save();
+        ctx.translate(x, y);
+        ctx.rotate(angle);
+
+        const shaftGrad = ctx.createLinearGradient(-34, 0, 26, 0);
+        shaftGrad.addColorStop(0, '#f3c6b6');
+        shaftGrad.addColorStop(0.5, '#ffe7b3');
+        shaftGrad.addColorStop(1, '#fff8e7');
+        ctx.strokeStyle = shaftGrad;
+        ctx.lineWidth = 3;
+        ctx.lineCap = 'round';
+        ctx.beginPath();
+        ctx.moveTo(-34, 0);
+        ctx.lineTo(22, 0);
+        ctx.stroke();
+
+        ctx.fillStyle = '#ff759f';
+        ctx.beginPath();
+        ctx.moveTo(-34, 0);
+        ctx.lineTo(-42, -7);
+        ctx.lineTo(-27, -2);
+        ctx.closePath();
+        ctx.fill();
+
+        ctx.beginPath();
+        ctx.moveTo(-34, 0);
+        ctx.lineTo(-42, 7);
+        ctx.lineTo(-27, 2);
+        ctx.closePath();
+        ctx.fill();
+
+        ctx.save();
+        ctx.translate(25, 0);
+        ctx.rotate(Math.PI / 2);
+        ctx.fillStyle = '#ff4f87';
+        ctx.shadowColor = '#ff4f87';
+        ctx.shadowBlur = 10;
+        ctx.beginPath();
+        const hr = 7.5;
+        ctx.moveTo(0, -hr * 0.9);
+        ctx.bezierCurveTo(hr * 1.1, -hr * 0.1, hr * 0.9, hr * 0.9, 0, hr * 0.3);
+        ctx.bezierCurveTo(-hr * 0.9, hr * 0.9, -hr * 1.1, -hr * 0.1, 0, -hr * 0.9);
+        ctx.fill();
+        ctx.restore();
+
+        ctx.restore();
+      }
+
+      function drawBow(ctx) {
+        const pullBack = bow.pulling ? bow.power * 34 : 0;
+        const aimAngle = bow.pulling ? bow.angle : -Math.PI / 2;
+
+        ctx.save();
+        ctx.translate(bow.x, bow.y);
+        ctx.rotate(aimAngle + Math.PI / 2);
+
+        const limbSpan = 56;
+        const bend = pullBack * 0.35;
+
+        ctx.strokeStyle = 'rgba(255, 232, 240, 0.88)';
+        ctx.lineWidth = 1.8;
+        ctx.beginPath();
+        ctx.moveTo(-limbSpan + bend * 0.35, 16 + bend * 0.25);
+        ctx.lineTo(0, 18 + pullBack);
+        ctx.lineTo(limbSpan - bend * 0.35, 16 + bend * 0.25);
+        ctx.stroke();
+
+        const bowGrad = ctx.createLinearGradient(-limbSpan, 0, limbSpan, 0);
+        bowGrad.addColorStop(0, '#e5a998');
+        bowGrad.addColorStop(0.5, '#ffe5b8');
+        bowGrad.addColorStop(1, '#e5a998');
+        ctx.strokeStyle = bowGrad;
+        ctx.lineWidth = 5.5;
+        ctx.lineCap = 'round';
+        ctx.shadowColor = 'rgba(255, 200, 175, 0.55)';
+        ctx.shadowBlur = 12;
+
+        ctx.beginPath();
+        ctx.moveTo(-limbSpan + bend * 0.35, 16 + bend * 0.25);
+        ctx.quadraticCurveTo(-limbSpan * 0.45, -18, 0, -14);
+        ctx.quadraticCurveTo(limbSpan * 0.45, -18, limbSpan - bend * 0.35, 16 + bend * 0.25);
+        ctx.stroke();
+
+        ctx.fillStyle = '#ff5c8d';
+        ctx.beginPath();
+        ctx.arc(0, -13, 4.5, 0, Math.PI * 2);
+        ctx.fill();
+
+        if (!arrow.flying && !arrow.stuck) {
+          ctx.shadowBlur = 0;
+          drawArrowShape(ctx, 0, -4 + pullBack, -Math.PI / 2);
+        }
+
+        ctx.restore();
+
+        if (bow.pulling && bow.power > 0.14) {
+          const speed = 10.5 + bow.power * 11.5;
+          let px = bow.x + Math.cos(bow.angle) * 22;
+          let py = bow.y + Math.sin(bow.angle) * 22;
+          let vx = Math.cos(bow.angle) * speed;
+          let vy = Math.sin(bow.angle) * speed;
+
+          ctx.save();
+          for (let i = 0; i < 16; i++) {
+            px += vx * 1.4;
+            py += vy * 1.4;
+            vy += 0.24 * 1.4;
+            const alpha = (1 - i / 16) * 0.62;
+            ctx.fillStyle = `rgba(255, 220, 234, ${alpha})`;
+            ctx.beginPath();
+            ctx.arc(px, py, 2.4, 0, Math.PI * 2);
+            ctx.fill();
+          }
+          ctx.restore();
+        }
+      }
+
+      function updateAndRenderGame() {
+        if (!gameActive) return;
+
+        gCtx.clearRect(0, 0, gW, gH);
+
+        if (!gameWon) {
+          target.phase += 0.022;
+          target.pulse += 0.065;
+          const swayRange = Math.min(gW * 0.28, 120);
+          target.x = gW / 2 + Math.sin(target.phase) * swayRange;
+          target.y = target.baseY + Math.sin(target.phase * 2) * 14;
+        }
+
+        drawGlowingTargetHeart(gCtx, target.x, target.y, target.radius, target.pulse);
+        drawBow(gCtx);
+
+        if (arrow.flying) {
+          arrow.x += arrow.vx;
+          arrow.y += arrow.vy;
+          arrow.vy += 0.24;
+          arrow.angle = Math.atan2(arrow.vy, arrow.vx);
+
+          arrow.trail.push({ x: arrow.x, y: arrow.y });
+          if (arrow.trail.length > 14) arrow.trail.shift();
+
+          for (let i = 0; i < arrow.trail.length; i++) {
+            const t = arrow.trail[i];
+            const ratio = i / arrow.trail.length;
+            gCtx.fillStyle = `rgba(255, 190, 215, ${ratio * 0.65})`;
+            gCtx.beginPath();
+            gCtx.arc(t.x, t.y, ratio * 3.5, 0, Math.PI * 2);
+            gCtx.fill();
+          }
+
+          drawArrowShape(gCtx, arrow.x, arrow.y, arrow.angle);
+
+          const tipX = arrow.x + Math.cos(arrow.angle) * 24;
+          const tipY = arrow.y + Math.sin(arrow.angle) * 24;
+          const dist = Math.hypot(tipX - target.x, tipY - target.y);
+
+          if (dist < target.radius * 1.18) {
+            arrow.flying = false;
+            arrow.stuck = true;
+            gameWon = true;
+            playSound('hit');
+
+            const rect = gameCanvas.getBoundingClientRect();
+            spawnCelebrationBurst(rect.left + target.x, rect.top + target.y, 85);
+            setTimeout(() => {
+              spawnCelebrationBurst(rect.left + target.x - 40, rect.top + target.y - 20, 40);
+              spawnCelebrationBurst(rect.left + target.x + 40, rect.top + target.y + 10, 40);
+            }, 220);
+
+            showToast('Yuragimga tegdi! 💘✨', 2200);
+
+            setTimeout(() => {
+              gameActive = false;
+              switchStage(2);
+            }, 1300);
+          } else if (arrow.x < -60 || arrow.x > gW + 60 || arrow.y < -80 || arrow.y > gH + 80) {
+            showToast("Biroz qoldi, yana urinib ko'r! 💕", 1800);
+            resetArrow();
+          }
+        } else if (arrow.stuck) {
+          drawArrowShape(gCtx, arrow.x, arrow.y, arrow.angle);
+        }
+      }
+
+      /* -----------------------------------------
+         8. STAGE 2: UN-DISAPPEARING RUNAWAY BUTTON
+            Detaches directly to document.body with position: fixed
+            and strict viewport clamping so it NEVER clips or vanishes.
+         ----------------------------------------- */
+      const yesMeetBtn = document.getElementById('yesMeetBtn');
+      const noMeetBtn = document.getElementById('noMeetBtn');
+
+      const playfulTexts = [
+        'Aniqmi? 🥺',
+        "O'ylab ko'r!",
+        'Qocha olmaysan 😜',
+        'Baribir uchrashamiz ❤️',
+        "Yo'q dema!",
+        'Xohlamayman',
+      ];
+      let runawayCount = 0;
+      let isDetachedToBody = false;
+      let lastDodgeTime = 0;
+
+      function clampRunawayInsideViewport() {
+        if (!isDetachedToBody || currentStage !== 2) return;
+        const margin = 20;
+        const btnW = Math.max(noMeetBtn.offsetWidth, 140);
+        const btnH = Math.max(noMeetBtn.offsetHeight, 48);
+        const curLeft = parseFloat(noMeetBtn.style.left) || margin;
+        const curTop = parseFloat(noMeetBtn.style.top) || 80;
+
+        const clampedX = Math.min(Math.max(margin, curLeft), Math.max(margin, window.innerWidth - btnW - margin));
+        const clampedY = Math.min(Math.max(margin, curTop), Math.max(margin, window.innerHeight - btnH - margin));
+
+        noMeetBtn.style.left = `${Math.round(clampedX)}px`;
+        noMeetBtn.style.top = `${Math.round(clampedY)}px`;
+      }
+
+      function dodgeNoButton(e) {
+        if (e) {
+          e.preventDefault();
+          e.stopPropagation();
+        }
+        if (currentStage !== 2) return;
+
+        // Prevent double-firing on touchstart + click
+        const now = performance.now();
+        if (now - lastDodgeTime < 140) return;
+        lastDodgeTime = now;
+
+        playSound('boing');
+        noMeetBtn.textContent = playfulTexts[runawayCount % playfulTexts.length];
+        runawayCount++;
+
+        // CRITICAL FIX: Detach from glass-card/stage transform & overflow
+        // and append directly to document.body at z-index 9999
+        if (!isDetachedToBody) {
+          const startRect = noMeetBtn.getBoundingClientRect();
+          document.body.appendChild(noMeetBtn);
+          noMeetBtn.style.position = 'fixed';
+          noMeetBtn.style.zIndex = '9999';
+          noMeetBtn.style.width = 'auto';
+          noMeetBtn.style.minWidth = '144px';
+          noMeetBtn.style.margin = '0';
+          noMeetBtn.style.opacity = '1';
+          noMeetBtn.style.visibility = 'visible';
+          noMeetBtn.style.display = 'inline-flex';
+          noMeetBtn.style.left = `${Math.round(startRect.left)}px`;
+          noMeetBtn.style.top = `${Math.round(startRect.top)}px`;
+          noMeetBtn.style.transition = 'left 0.25s ease, top 0.25s ease';
+          isDetachedToBody = true;
+          // Force layout reflow so the first transition animates smoothly
+          void noMeetBtn.offsetWidth;
+        }
+
+        // Measure actual current dimensions after text update
+        const btnW = noMeetBtn.offsetWidth || 150;
+        const btnH = noMeetBtn.offsetHeight || 48;
+        const margin = 20;
+        const topMargin = 64;
+
+        const maxX = Math.max(margin, window.innerWidth - btnW - margin);
+        const maxY = Math.max(topMargin, window.innerHeight - btnH - margin);
+        const yesRect = yesMeetBtn.getBoundingClientRect();
+
+        let newX = margin;
+        let newY = topMargin;
+
+        // Find a guaranteed-visible spot that does not overlap the "Uchrashamiz" button
+        for (let attempt = 0; attempt < 24; attempt++) {
+          const candX = margin + Math.random() * Math.max(0, maxX - margin);
+          const candY = topMargin + Math.random() * Math.max(0, maxY - topMargin);
+
+          const overlapsYes =
+            candX < yesRect.right + 18 &&
+            candX + btnW > yesRect.left - 18 &&
+            candY < yesRect.bottom + 18 &&
+            candY + btnH > yesRect.top - 18;
+
+          const tooCloseToCurrent =
+            Math.hypot(candX - (parseFloat(noMeetBtn.style.left) || 0), candY - (parseFloat(noMeetBtn.style.top) || 0)) < 75;
+
+          if (!overlapsYes && !tooCloseToCurrent) {
+            newX = candX;
+            newY = candY;
+            break;
+          }
+          if (!overlapsYes) {
+            newX = candX;
+            newY = candY;
+          }
+        }
+
+        // Final strict clamp to guarantee 100% viewport visibility
+        newX = Math.min(Math.max(margin, newX), maxX);
+        newY = Math.min(Math.max(topMargin, newY), maxY);
+
+        noMeetBtn.style.left = `${Math.round(newX)}px`;
+        noMeetBtn.style.top = `${Math.round(newY)}px`;
+        noMeetBtn.style.opacity = '1';
+        noMeetBtn.style.visibility = 'visible';
+
+        // Gently encourage the "Uchrashamiz" button
+        const grow = Math.min(1.1, 1 + runawayCount * 0.02);
+        yesMeetBtn.style.transform = `scale(${grow})`;
+      }
+
+      noMeetBtn.addEventListener('pointerenter', (e) => {
+        if (e.pointerType === 'mouse') dodgeNoButton(e);
+      });
+      noMeetBtn.addEventListener('touchstart', dodgeNoButton, { passive: false });
+      noMeetBtn.addEventListener('click', dodgeNoButton);
+
+      yesMeetBtn.addEventListener('click', () => {
+        playSound('celebrate');
+        // Cleanly remove runaway button from DOM once accepted
+        if (noMeetBtn && noMeetBtn.parentNode) {
+          noMeetBtn.parentNode.removeChild(noMeetBtn);
+        }
+
+        spawnCelebrationBurst(window.innerWidth * 0.5, window.innerHeight * 0.52, 85);
+        setTimeout(() => {
+          spawnCelebrationBurst(window.innerWidth * 0.25, window.innerHeight * 0.35, 38);
+          spawnCelebrationBurst(window.innerWidth * 0.75, window.innerHeight * 0.35, 38);
+        }, 240);
+
+        switchStage(3);
+      });
+
+      /* -----------------------------------------
+         9. STAGE 3 & 4: SIMPLIFIED DATE PLANNER & FINAL TICKET
+         ----------------------------------------- */
+      const placeChipsContainer = document.getElementById('placeChips');
+      const customPlaceInput = document.getElementById('customPlaceInput');
+      const dateInput = document.getElementById('dateInput');
+      const timeInput = document.getElementById('timeInput');
+      const datePlannerForm = document.getElementById('datePlannerForm');
+
+      const plannerCard = document.getElementById('plannerCard');
+      const ticketCard = document.getElementById('ticketCard');
+      const ticketDateEl = document.getElementById('ticketDate');
+      const ticketTimeEl = document.getElementById('ticketTime');
+      const ticketPlaceEl = document.getElementById('ticketPlace');
+      const ticketCustomRow = document.getElementById('ticketCustomRow');
+      const ticketCustomText = document.getElementById('ticketCustomText');
+
+      let selectedChipPlace = "🌳 Bog'da";
+
+      placeChipsContainer.addEventListener('click', (e) => {
+        const chip = e.target.closest('.place-chip');
+        if (!chip) return;
+        const alreadySelected = chip.classList.contains('selected');
+        placeChipsContainer.querySelectorAll('.place-chip').forEach(c => c.classList.remove('selected'));
+        if (!alreadySelected) {
+          chip.classList.add('selected');
+          selectedChipPlace = chip.dataset.place;
+        } else {
+          selectedChipPlace = '';
+        }
+      });
+
+      function formatUzbekDate(isoDate) {
+        if (!isoDate) return '27-Noyabr, 2026';
+        const parts = isoDate.split('-');
+        if (parts.length !== 3) return isoDate;
+        const months = [
+          'Yanvar', 'Fevral', 'Mart', 'Aprel', 'May', 'Iyun',
+          'Iyul', 'Avgust', 'Sentabr', 'Oktabr', 'Noyabr', 'Dekabr'
+        ];
+        const y = parts[0];
+        const m = months[parseInt(parts[1], 10) - 1] || parts[1];
+        const d = parseInt(parts[2], 10);
+        return `${d}-${m}, ${y}`;
+      }
+
+      datePlannerForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        playSound('celebrate');
+
+        const chosenDate = formatUzbekDate(dateInput.value);
+        const chosenTime = timeInput.value || '18:00';
+        const customWish = customPlaceInput.value.trim();
+
+        ticketDateEl.textContent = chosenDate;
+        ticketTimeEl.textContent = chosenTime;
+
+        if (selectedChipPlace && customWish) {
+          // Both chip and custom suggestion provided
+          ticketPlaceEl.textContent = selectedChipPlace;
+          ticketCustomText.textContent = customWish;
+          ticketCustomRow.classList.remove('hidden');
+          ticketCustomRow.classList.add('flex');
+        } else if (customWish) {
+          // Only custom suggestion written
+          ticketPlaceEl.textContent = customWish;
+          ticketCustomRow.classList.add('hidden');
+          ticketCustomRow.classList.remove('flex');
+        } else {
+          // Only chip selected (default to Bog'da if neither)
+          ticketPlaceEl.textContent = selectedChipPlace || "🌳 Bog'da";
+          ticketCustomRow.classList.add('hidden');
+          ticketCustomRow.classList.remove('flex');
+        }
+
+        // Reveal clean finalized romantic ticket (No share/send/copy buttons)
+        plannerCard.classList.add('hidden');
+        ticketCard.classList.remove('hidden');
+        ticketCard.classList.add('flex');
+
+        // Celebratory fireworks & hearts
+        spawnCelebrationBurst(window.innerWidth * 0.5, window.innerHeight * 0.35, 90);
+        clearInterval(ticketFireworksTimer);
+        ticketFireworksTimer = setInterval(() => {
+          if (currentStage !== 3 || ticketCard.classList.contains('hidden')) {
+            clearInterval(ticketFireworksTimer);
+            return;
+          }
+          const rx = window.innerWidth * (0.2 + Math.random() * 0.6);
+          const ry = window.innerHeight * (0.16 + Math.random() * 0.32);
+          spawnCelebrationBurst(rx, ry, 30);
+        }, 2600);
+      });
+
+      /* -----------------------------------------
+         10. MAIN ANIMATION LOOP & WINDOW EVENTS
+         ----------------------------------------- */
+      function mainLoop() {
+        renderSky();
+        updateAndRenderGame();
+        renderFx();
+        requestAnimationFrame(mainLoop);
+      }
+
+      function handleResize() {
+        resizeSkyCanvas();
+        resizeFxCanvas();
+        resizeGameCanvas();
+        clampRunawayInsideViewport();
+      }
+
+      window.addEventListener('resize', handleResize);
+      window.onload = function () {
+        handleResize();
+        requestAnimationFrame(mainLoop);
+      };
+    })();
+  </script>
+</body>
+</html>
